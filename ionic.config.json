@@ -1,0 +1,7 @@
+{
+  "name": "SwappX",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
