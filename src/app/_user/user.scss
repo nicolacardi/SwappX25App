@@ -1,0 +1,30 @@
+body {
+  height: 100%;
+}
+
+
+.login-background { /* QUESTA CLASSE NON  VIENE PROPRIO VISTA*/
+  background-image: url("../../assets/BackgroundBlackboard.jpg");
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  height: 100vh;
+  display: flex; /* Imposta Flexbox */
+  align-items: center; /* Allinea verticalmente */
+}
+
+
+ion-card {
+  width: 100%; /* Occupare tutta la larghezza */
+  max-width: 100%; /* Assicurarsi che non venga ristretta */
+  /* Aggiungi altre regole di stile per l'ion-card se necessario */
+}
+
+ion-card-content {
+  height: 300px;  /* 56px è l'altezza approssimativa dell'header della ion-card */
+}
+
+
+.logo-login {
+  width: 200px;
+}

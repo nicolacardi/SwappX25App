@@ -1,0 +1,29 @@
+<form [formGroup]="form" autocomplete="off" (submit)="onSubmit()" class="ma" style="overflow-y: hidden;">
+  
+    <div class="center">
+      <ion-text>
+        <p>Digita l'indirizzo mail</p>
+        <p>utilizzato per la registrazione</p>
+      </ion-text>
+    </div>
+  
+    <div>
+      <ion-item class="w90 ma">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="Email"></ion-input>
+      </ion-item>
+    </div>
+  
+    <div class="fx_center">
+      <ion-button class="w90" type="submit" [disabled]="form.invalid">
+        Reset Password
+      </ion-button>
+    </div>
+  
+    <div class="fx_center">
+      <ion-button class="w90" fill="clear" (click)="backToLogin($event)">
+        Torna alla pagina di Login
+      </ion-button>
+    </div>
+  
+  </form>

@@ -1,0 +1,147 @@
+<form *ngIf="(persona$ | async) || emptyForm" class="data-form flex-form" [formGroup]="form">
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input type="text" required minlength="3" formControlName="nome"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Cognome</ion-label>
+            <ion-input type="text" required formControlName="cognome"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4" *ngIf="dove != 'procedura-iscrizione'">
+          <!-- <ion-item>
+            <ion-label>Anagrafica Attiva</ion-label>
+            <ion-checkbox formControlName="ckAttivo"></ion-checkbox>
+          </ion-item> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Genere (M/F)</ion-label>
+            <ion-input type="text" required formControlName="genere"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Codice Fiscale</ion-label>
+            <ion-input type="text" formControlName="cf"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+            <ion-item>
+                <ion-label position="floating">Data di Nascita</ion-label>
+                <ion-input type="date" formControlName="dtNascita"></ion-input>
+              </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Comune di Nascita</ion-label>
+            <ion-input type="text" formControlName="comuneNascita" ></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Prov. di nascita</ion-label>
+            <ion-input type="text" formControlName="provNascita"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Paese di nascita</ion-label>
+            <ion-input type="text" formControlName="nazioneNascita"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Comune di Residenza</ion-label>
+            <ion-input type="text" formControlName="comune"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Prov. di Residenza</ion-label>
+            <ion-input type="text" formControlName="prov"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Paese di Residenza</ion-label>
+            <ion-input type="text" formControlName="nazione"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Indirizzo e N.</ion-label>
+            <ion-input type="text" formControlName="indirizzo"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">CAP</ion-label>
+            <ion-input type="text" formControlName="cap"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">Telefono</ion-label>
+            <ion-input type="text" formControlName="telefono"></ion-input>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4">
+          <ion-item>
+            <ion-label position="floating">e-mail</ion-label>
+            <ion-input type="text" formControlName="email" [required]="dove == 'procedura-iscrizione'"></ion-input>
+            <!-- <ion-text color="danger" *ngIf="form.get('email').hasError('required')">Campo errato</ion-text> -->
+          </ion-item>
+        </ion-col>
+  
+        <ion-col size="12" size-md="4" *ngIf="dove != 'procedura-iscrizione'">
+          <!-- <ion-item>
+            <ion-label>Utente Registrato</ion-label>
+            <ion-checkbox formControlName="ckRegistrato"></ion-checkbox>
+          </ion-item> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  

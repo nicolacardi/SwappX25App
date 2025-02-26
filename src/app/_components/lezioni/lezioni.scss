@@ -1,0 +1,74 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-calendar-container {
+  flex: 1;
+  display: flex;
+}
+
+.full-calendar-container {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.fc {
+  width: 100% !important;
+}
+
+.fc-view-harness {
+  width: 100% !important;
+}
+
+
+
+// .full-calendar-container .fc {
+//     transform: rotate(-90deg); /* Ruota il calendario di -90 gradi */
+//     transform-origin: top left; /* Punto di origine della rotazione */
+//     position: absolute;
+//     top: 100%;
+//     left: 0;
+//     width: 100vh; /* Imposta la larghezza del calendario */
+//     height: 100vw; /* Imposta l'altezza del calendario */
+//   }
+  
+
+//   .fc-col-header { non si può modificare perchè poi c'è uno style 53px;
+//     width: 800px !important;
+//   }
+/* Forza la larghezza dei giorni */
+
+/* Forziamo la larghezza delle colonne */
+// .fc-timegrid-col {
+//     min-width: 120px !important;
+//     max-width: 120px !important;
+//   }
+  
+  /* Regoliamo la larghezza delle colonne della tabella */
+//   .fc-scrollgrid-sync-table col {
+//     width: 300px !important;
+//   }
+//   .fc-timegrid-slot {
+//     height: 50px !important; /* Imposta l'altezza delle celle delle ore */
+//   }
+  
+//   .fc-timegrid-event {
+//     font-size: 14px; /* Regola la dimensione del testo degli eventi */
+//     padding: 5px;
+//     white-space: nowrap; /* Impedisce che il testo degli eventi vada a capo */
+//   }
+  
+//   .fc-timegrid-event-inner {
+//     padding: 2px 5px; /* Aggiusta il padding interno degli eventi */
+//   }
+
+.icon-green {
+  color: green;
+}
+
+.icon-red {
+  color: red;
+}
+  

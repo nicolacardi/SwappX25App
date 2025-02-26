@@ -1,0 +1,20 @@
+    <div class="icon-title-container">
+        <ion-icon class="fs24 mt15" name="warning-outline"></ion-icon>
+        <h3 mat-dialog-title>{{ data.titolo }}</h3>
+    </div>
+
+
+    <div class="center" mat-dialog-content>
+
+        <p style="white-space: normal" innerHTML="{{data.sottoTitolo}}"></p>
+        
+    </div>
+    <div mat-dialog-actions class="mat-dialog-buttonsContainer">
+        <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ok</button> 
+    </div>
+
+
+
+    
+
+

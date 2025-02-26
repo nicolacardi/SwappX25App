@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>I tuoi figli</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="figli.length > 0; else noFigli">
+    <ion-card *ngFor="let figlio of figli" class="figlio-card">
+      <ion-card-header>
+        <!-- Foto Profilo -->
+        <div class="foto-wrapper">
+          <img *ngIf="figlio.foto?.foto" [src]="figlio.foto?.foto" alt="Foto di {{ figlio.persona.nome }}" class="foto-figlio">
+          <img *ngIf="!figlio.foto?.foto" src="../assets/userdefault.png" class="foto-figlio">
+        </div>
+        <ion-card-title>{{ figlio.persona.nome }} {{ figlio.persona.cognome }}</ion-card-title>
+
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Data di nascita:</strong> {{ figlio.persona.dtNascita | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Comune di nascita:</strong> {{ figlio.persona.comuneNascita }} ({{ figlio.persona.provNascita }})</p>
+        <p><strong>Codice Fiscale:</strong> {{ figlio.persona.cf }}</p>
+        <p><strong>Telefono:</strong> {{ figlio.persona.telefono }}</p>
+        <p><strong>Email:</strong> {{ figlio.persona.email }}</p>
+
+        <p *ngIf="figlio.iscrizione" class="classe-container">
+          <span>
+            <strong>Classe:</strong> {{ figlio.iscrizione.classeSezioneAnno.classeSezione.classe?.descrizione }} 
+            <strong>Sezione:</strong> {{ figlio.iscrizione.classeSezioneAnno.classeSezione.sezione }}
+          </span>
+        
+
+          
+          <ion-button expand="block" size="small" (click)="mostraOrario(figlio.iscrizione.classeSezioneAnno.id, figlio.iscrizione.classeSezioneAnno.classeSezione.classe?.descrizioneBreve + ' ' + figlio.iscrizione.classeSezioneAnno.classeSezione.sezione)" class="mt10">
+            <ion-icon slot="start" name="calendar"></ion-icon>
+             Orario delle lezioni
+          </ion-button>
+
+          <ion-button expand="block" size="small" (click)="mostraPagamenti(figlio.iscrizione.alunnoID, annoCorrente)" class="mt10">
+            <ion-icon slot="start" name="card-outline"></ion-icon>
+             Elenco Pagamenti
+          </ion-button>
+
+          <ion-button expand="block" size="small" (click)="mostraPresenze(figlio.iscrizione.alunnoID, annoCorrente)" class="mt10">
+            <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+            Presenze/Assenze
+          </ion-button>
+
+          <ion-button expand="block" size="small" (click)="mostraDocumenti(figlio.iscrizione.alunnoID)" class="mt10">
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            Pagelle e Altri Documenti
+          </ion-button>
+          
+        </p>
+        
+        
+        
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noFigli>
+    <ion-item>
+      <ion-label>Nessun figlio associato.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

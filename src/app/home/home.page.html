@@ -1,20 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="welcome-container mt56">
+    <h2>Benvenuto</h2>
+    <h1>{{ currUser.fullname }}</h1>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="bacheca-container">
+    <h3 class="bacheca-title">Bacheca</h3>
+
+    <div *ngFor="let item of bachecaItems; let i = index" 
+         class="bacheca-item mb10 " 
+         [class.expanded]="expandedIndex === i" 
+         (click)="toggleExpand(i)">
+
+      <img *ngIf="item.fileBase64" 
+           class="bacheca-img" 
+           [src]="item.fileBase64">
+
+      <p class="bacheca-description">{{ item.descrizione }}</p>
+    </div>
+  </div>
+
+  <div class="bacheca-container">
+    <h3 class="bacheca-title" (click)="toggleContattiScuola()">
+      Contatti Scuola
+      <ion-icon [name]="contattiScuolaExpanded ? 'chevron-down' : 'chevron-forward'" class="chevron-icon"></ion-icon>
+    </h3>
+    <div *ngIf="contattiScuolaExpanded" class="contatti-scuola">
+      <p><strong>Tel Segreteria:</strong> 346 4287563</p>
+      <p><strong>Mail Segreteria:</strong>   <a href="mailto:segreteria@arcascuola.it"> segreteria&#64;arcascuola.it</a></p>
+      <p><strong>Orari segreteria:</strong></p>
+      <ul>
+        <li>Lun 8.10-13.45</li>
+        <li>Mar 8.10-12.50</li>
+        <li>Mer 8.10-13.45</li>
+        <li>Gio 13.30-16.30</li>
+        <li>Ven 8.10-12.50</li>
+      </ul>
+      <p><strong>Presidenza:</strong>   <a href="mailto:preside@arcascuola.it"> presidenza&#64;arcascuola.it</a></p>
+      <p><strong>IBAN:</strong>  IT97 K032 9601 6010 0006 6418 553 </p>
+    </div>
   </div>
 </ion-content>

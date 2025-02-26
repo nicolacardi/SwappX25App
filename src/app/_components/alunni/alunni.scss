@@ -1,0 +1,32 @@
+ion-card-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 60px; // Distanza dal testo per evitare sovrapposizioni
+  }
+  
+  .foto-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ddd; // Bordo intorno alla foto
+    background-color: #fff; // Sfondo in caso di errore di caricamento
+  }
+  
+  .foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+  
+
+  
+
+  

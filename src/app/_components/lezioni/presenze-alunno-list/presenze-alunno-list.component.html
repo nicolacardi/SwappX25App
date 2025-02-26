@@ -1,0 +1,16 @@
+<ion-content>
+<ion-list class="mt56">
+    <ion-item *ngFor="let presenza of presenze">
+      <ion-icon 
+        slot="start" 
+        [name]="presenza.ckPresente ? 'person-circle-outline' : 'person-circle-outline'" 
+        [ngClass]="presenza.ckPresente ? 'icon-green' : 'icon-red'">
+      </ion-icon>      
+      <ion-label>
+        <h2>{{ presenza.lezione!.dtCalendario | date: 'dd/MM/yyyy' }} | {{ presenza.lezione!.h_Ini }}</h2>
+        <p><strong>Materia:</strong> {{ presenza.lezione!.materia.descrizione }}</p>
+        <p><strong>Docente:</strong> {{ presenza.lezione!.docente.persona.nome }} {{ presenza.lezione!.docente.persona.cognome }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

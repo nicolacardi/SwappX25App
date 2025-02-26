@@ -1,0 +1,24 @@
+<ion-content>
+    <ion-list class="mt56">
+      <ion-item *ngFor="let pagamento of Pagamenti" style="position: relative;">
+        <ion-label>
+          <h2>{{ pagamento.dtPagamento | date:'dd/MM/yyyy' }}</h2>
+  
+          <!-- Visualizza il mese se la causale è "retta" -->
+
+  
+          <p><strong>Tipo:</strong> {{ pagamento.tipoPagamento.descrizione }}</p>
+          <p><strong>Causale: </strong> <span style="color:red">{{ pagamento.causale.descrizione }}
+          <span *ngIf="pagamento.causale.descrizione === 'Retta'">
+            <strong>{{ getNomeMese(pagamento.retta.meseRetta) }}</strong>
+          </span></span></p>
+        </ion-label>
+  
+        <!-- Importo in alto a destra -->
+        <ion-label style="position: absolute; top: 10px; right: 10px; color: purple">
+          {{ pagamento.importo | currency:'EUR' }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  

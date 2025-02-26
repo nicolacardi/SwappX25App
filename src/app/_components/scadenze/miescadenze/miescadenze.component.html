@@ -1,0 +1,42 @@
+<ion-content class="card ion-elevation-z8 pb10 mt56" style="height: 100%;">
+
+
+
+  <ion-item class="mt56" lines="none">
+    <ion-label>Mostra notifiche già lette</ion-label>
+    <ion-checkbox slot="start" color="primary" (click)="toggleAttivi()"></ion-checkbox>
+  </ion-item>
+
+  <ion-card *ngFor="let element of (obsMieScadenze$ | async)" class="mt10 mr10">
+
+    <ion-card-content>
+      <span class="fs14">{{element.scadenza!.dtCalendario | date: "dd/MM/yy"}}</span> 
+      <span class="fs12"> - h.{{element.scadenza!.h_Ini}}</span><br>
+      <span class="fs16">{{element.scadenza!.title}}</span>
+      
+      <div *ngIf="element.link">
+        <ion-button color="primary" [routerLink]="'/procedura-iscrizione'" [queryParams]="{ iscrizioneID: element.link }">
+          Link a iscrizione
+        </ion-button>
+      </div>
+      
+      <span class="fs40 _pos-absolute r10 t10" [ngStyle]="{'color': element.scadenza!.tipoScadenza!.color}">
+        ●
+      </span>
+    </ion-card-content>
+
+
+    <div *ngIf="element.scadenza!.ckRisposta" class="ml15 mb10">
+      <ion-toggle [checked]="element.ckAccettato" (click)="setAccettato(element)" >Accetta l'invito</ion-toggle>
+    </div>
+
+    <div class="mb5 mt5 ml15 mb10">
+      <ion-checkbox *ngIf="!element.scadenza!.ckRisposta" 
+                (click)="setLetto(element)" [disabled] = "element.ckLetto" [checked]="element.ckLetto">
+      Conferma di lettura
+      </ion-checkbox>
+    </div>
+
+  </ion-card>
+
+</ion-content>

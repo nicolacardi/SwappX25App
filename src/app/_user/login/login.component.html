@@ -1,0 +1,43 @@
+
+
+  <form [formGroup]="form" autocomplete="off" (submit)="onSubmit()" >
+    
+    <ion-item>
+      <ion-input
+        type="email"
+        placeholder="Nome utente o Email"
+        formControlName="UserName"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        [type]="ckPsw ? 'text' : 'password'"
+        placeholder="Password"
+        formControlName="Password"
+        required
+      ></ion-input>
+      <ion-icon
+        slot="end"
+        [name]="ckPsw ? 'eye' : 'eye-off'"
+        (click)="toggleShow()"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="form.invalid">
+      Login
+    </ion-button>
+
+    <ion-button expand="full" fill="clear" (click)="forgotPassword($event)">
+      Dimenticata la password?
+    </ion-button>
+
+    <ion-button expand="full" fill="clear" (click)="register($event)">
+      Registrazione
+    </ion-button>
+
+
+
+  </form>
+

@@ -1,0 +1,19 @@
+<div class="login-background">
+  <ion-card class="user-container login-card" mode="md">
+    <ion-card-header>
+      <img *ngIf="routerPage=='login'" class="logo-login ma" src="./assets/logoscrittacolor.png" />
+      <img *ngIf="routerPage=='reset-psw' || routerPage == 'register'" class="logo-login ma" src="./assets/logoscrittaazzurro.png" />
+    </ion-card-header>
+
+    <ion-card-content class="mt20">
+
+      <app-login  *ngIf="routerPage=='login'" (reloadRoutes)="reloadRoutesEmitted($event)"> </app-login>
+      <app-reset-psw *ngIf="routerPage=='reset-psw'" (reloadRoutes)="reloadRoutesEmitted($event)"></app-reset-psw>
+      
+    </ion-card-content>
+  </ion-card>
+</div>
+
+
+
+

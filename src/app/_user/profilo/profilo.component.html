@@ -1,0 +1,40 @@
+
+<ion-content fullscreen="true" >
+    <form [formGroup]="form" class="ml5 mr5">
+
+        <!-- <div class="mt20 image-cropper _bordered"> -->
+        <div class="w100px ma br200 mt60 _oflow-hide">
+            <ion-img #myImg *ngIf="imgFile" class="w100px  br200 " [src]="imgFile"></ion-img>
+        
+            <!-- <ion-img #myImg [src]="imgFile" class="w100px br200 _bordered" *ngIf="imgFile"></ion-img> -->
+
+        </div>
+        <!-- </div> -->
+
+        <div class="flex-container form-group mt20 ">
+            <div class="form-group">
+                <input type="file" class="form-control" id="file" accept=".gif,.jpg,.jpeg,.png" formControlName="file" (change)="onImageChange($event)"hidden #selectFile>
+                <ion-button expand="block" (click)="selectFile.click()">Seleziona Immagine</ion-button>
+                <!-- <div *ngIf="uf.file.touched && uf.file.invalid" class="alert alert-danger">
+                    <div *ngIf="uf.file.errors.required">Image file is required.</div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="center mt10">
+            <ion-item>
+                <ion-label position="floating">Nome Utente</ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+            </ion-item>
+        </div>
+
+        <app-persona-form 
+            [personaID] = "currUser.personaID" >
+        </app-persona-form>
+    </form>
+
+    <div class="center mt10 ml5 mr5 mb10">
+        <ion-button expand="block" (click)="save()">Salva</ion-button>
+    </div>
+
+</ion-content>

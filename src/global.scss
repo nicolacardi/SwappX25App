@@ -35,3 +35,542 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
+
+    body { 
+        margin: 0; /*toglierlo determina una seconda scrollbar verticale*/
+        font-family: 'Titillium Web', sans-serif;
+        /* letter-spacing: 0em !important; */
+    }
+
+    * { 
+        font-family: 'Titillium Web', sans-serif;
+        letter-spacing: 0em ;                    /* fix font dopo migrazione a ng v15 */
+
+    }
+
+    ion-label { 
+        font-family: 'Titillium Web', sans-serif !important;
+        letter-spacing: 0em ;                    /* fix font dopo migrazione a ng v15 */
+
+    }
+
+    ._pos-absolute {
+        position: absolute;
+    }
+
+    h2 { font-family: 'Titillium Web', sans-serif !important;
+    }
+
+    h3 { font-family: 'Titillium Web', sans-serif !important;
+    } 
+
+
+/*#region ********** FONT-SIZE *********/
+    .fs8 {
+        font-size: 8px ;
+    }
+
+    .fs10 {
+        font-size: 10px !important;
+    }
+
+    .fs12 {
+        font-size: 12px !important;
+    }
+
+    .fs14 {
+        font-size: 14px !important;
+    }
+
+    .fs16 {
+        font-size: 16px;
+    }
+
+    .fs18 {
+        font-size: 18px;
+    }
+
+    .fs20 {
+        font-size: 20px;
+    }
+
+    .fs22 {
+        font-size: 22px;
+    }
+
+    .fs24 {
+        font-size: 24px;
+    }
+
+    .fs26 {
+        font-size: 26px;
+    }
+
+    .fs28 {
+        font-size: 28px;
+    }
+
+    .fs30 {
+        font-size: 30px;
+    }
+
+    .fs40 {
+        font-size: 40px;
+    }
+
+    .fs50 {
+        font-size: 50px;
+    }
+/*#endregion ***************************/
+
+    .ma {
+        margin: auto;
+    }
+
+    .r10 {
+        right: 10px;
+    }
+
+    /* margin-bottom */
+    .mb0 {
+        margin-bottom: 0px !important;
+    }
+
+    .mb5 {
+        margin-bottom: 5px;
+    }
+
+    .mb10 {
+        margin-bottom: 10px !important;
+    }
+
+    .mb20 {
+        margin-bottom: 20px;
+    }
+
+    /* margin-left */
+
+
+    .ml2 {
+        margin-left: 2px;
+    }
+
+    .ml3 {
+        margin-left: 3px;
+    }
+
+    .ml4 {
+        margin-left: 4px;
+    }
+
+    .ml5 {
+        margin-left: 5px;
+    }
+
+    .ml6 {
+        margin-left: 6px;
+    }
+
+    .ml10 {
+        margin-left: 10px !important;
+    }
+
+    .ml12 {
+        margin-left: 12px;
+    }
+
+    .ml15 {
+        margin-left: 15px;
+    }
+
+    .ml20 {
+        margin-left: 20px;
+    }
+
+    .ml30 {
+        margin-left: 30px;
+    }
+
+    .ml50 {
+        margin-left: 50px;
+    }
+
+    .ml60 {
+        margin-left: 60px;
+    }
+
+    .ml70 {
+        margin-left: 70px;
+    }
+
+    .ml100 {
+        margin-left: 100px;
+    }
+
+    .ml130 {
+        margin-left: 130px;
+    }
+
+    .ml140 {
+        margin-left: 140px;
+    }
+
+    /* margin-right */
+    .mr5 {
+        margin-right: 5px;
+    }
+
+    .mr10 {
+        margin-right: 10px;
+    }
+
+    .mr15 {
+        margin-right: 15px;
+    }
+
+    .mr20 {
+        margin-right: 20px;
+    }
+
+    /* margin-top */
+
+    .mt0 {
+        margin-top: 0px;
+    }
+
+    .mt5 {
+        margin-top: 5px;
+    }
+
+    .mt10 {
+        margin-top: 10px !important;
+    }
+
+    .mt15 {
+        margin-top: 15px;
+    }
+    .mt20 {
+        margin-top: 20px;
+    }
+    .mt25 {
+        margin-top: 25px;
+    }
+    .mt30 {
+        margin-top: 30px;
+    }
+    .mt40 {
+        margin-top: 40px;
+    }
+    .mt50 {
+        margin-top: 50px;
+    }
+
+    .mt56 {
+        margin-top: 56px;
+    }
+
+    .mt60 {
+        margin-top: 60px;
+    }
+
+    .mt70 {
+        margin-top: 70px;
+    }
+
+    .mt80 {
+        margin-top: 80px;
+    }
+
+    .mt90 {
+        margin-top: 90px;
+    }
+
+    .mt100 {
+        margin-top: 100px;
+    }
+
+/*#endregion ***************************/
+
+/*#region ********** WIDTH *************/
+
+    /* percentuali */
+
+    .w5 {
+        width: 5%;
+    }
+
+    .w10 {
+        width: 10%;
+    }
+
+
+    .w20 {
+        width: 20%;
+    }
+
+    .w30 {
+        width: 30%;
+    }
+
+    .w50 {
+        width: 50%;
+    }
+
+    .w60 {
+        width: 60%;
+    }
+
+    .w70 {
+        width: 70%;
+    }
+
+    .w80 {
+        width: 80%;
+    }
+
+    .w90 {
+        width: 90%;
+    }
+
+    .w95 {
+        width: 95%;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+    /* pixels */
+
+    .w5px {
+        width: 5px;
+    }
+
+    .w10px {
+        width: 10px;
+    }
+
+    .w20px {
+        width: 20px;
+    }
+
+    .w24px {
+        width: 24px;
+    }
+
+    .w40px {
+        width: 40px;
+    }
+
+    .w50px {
+        width: 50px;
+    }
+
+    .w80px {
+        width: 80px;
+    }
+
+    .w90px {
+        width: 90px;
+    }
+
+    .w100px {
+        width: 100px;
+    }
+
+    .w125px {
+        width: 125px;
+    }
+
+    .w150px {
+        width: 150px;
+    }
+
+    .w180px {
+        width: 180px;
+    }
+
+    .w200px {
+        width: 200px;
+    }
+
+    .w225px {
+        width: 225px;
+    }
+
+    .w250px {
+        width: 250px;
+    }
+
+    .w300px {
+        width: 300px;
+    }
+
+    .w330px {
+        width: 330px;
+    }
+
+    .w350px {
+        width: 300px;
+    }
+
+    .w400px {
+        width: 400px;
+    }
+
+    .w420px {
+        width: 420px;
+    }
+
+    .w500px {
+        width: 500px;
+    }
+
+    .w570px {
+        width: 570px;
+    }
+
+    .w600px {
+        width: 600px;
+    }
+
+    .w630px {
+        width: 630px;
+    }
+
+    .w700px {
+        width: 700px;
+    }
+
+    .w750px {
+        width: 750px;
+    }
+
+    .mw300px {
+        max-width: 300px;
+    }
+/*#endregion ***************************/
+
+ion-item {
+    --min-height: 30px;  /* Altezza minima ridotta */
+  }
+  
+  .icon-title-container {
+    display: flex;
+    align-items: center; /* Allinea verticalmente */
+    justify-content: center; /* Centra orizzontalmente */
+    gap: 8px; /* Spazio tra icona e titolo */
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /*#region ********** ALIGN *************/
+  .center {
+    text-align: center;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    
+    .fx_center {
+        display: flex;
+        justify-content: center; /* Centra orizzontalmente */
+        align-items: center; /* Centra verticalmente, se necessario */
+        text-align: center;
+    }
+/*#endregion ***************************/
+  
+
+/*#region ********** BORDERS ***********/
+    .br10 {
+        border-radius: 10px; 
+    }
+
+    .br200 {
+        border-radius: 200px; 
+    }
+
+    ._border-left {
+        border-left: 1px solid grey;
+    }
+
+    ._border-left-lightgrey {
+        border-left: 1px solid lightgrey;
+    }
+
+    ._border-left-dot {
+        border-left: 1px dotted grey;
+    }
+
+    ._border-top-dot {
+        border-top: 1px dotted grey;
+    }
+
+    ._border-top {
+        border-top: 0.5px solid rgba(86, 86, 86, 0.279) !important;
+    }
+
+    ._cell-bordered {
+        border-radius: 2px;
+        border: 0.5px solid rgba(86, 86, 86, 0.279) !important;
+    }
+
+    ._bordered {
+        border: 3px solid rgba(0, 0, 0, 0.1);
+    }
+
+    ._bordered-white {
+        border: 2px solid rgb(255, 255, 255);
+    }
+
+    ._bordered-grey {
+        border: 1px solid grey;
+    }
+
+    ._bordered-drop-file {
+        border: 5px dashed grey;
+    }
+
+    ._bordered-lightgrey {
+        border: 1px solid lightgrey;
+    }
+
+
+    ._bordered-bottom {
+        border-bottom: 1px solid grey;
+    }
+
+    ._big-border {
+        border: 60px solid rgba(0,0,0, .3);
+    }
+
+    ._noborder {
+        border: none;
+    }
+
+    ._border-dotted {
+        outline: 0.5px dotted lightgrey;
+    }
+/*#endregion ***************************/
+
+
+/*#region ********** OVERFLOW **********/
+    ._oflow-hide {
+        overflow: hidden
+    }
+
+    ._oflow-vis {
+        overflow: visible
+    }
+/*#endregion ***************************/
+

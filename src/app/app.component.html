@@ -1,3 +1,60 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Menu laterale -->
+  <ion-menu #menu *ngIf="isLoggedIn" side="start" menuId="first" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item button routerLink="/home" (click)="setTitle('Home')" (click)="closeMenu(menu)">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+
+        <ion-item button routerLink="/figli" (click)="setTitle('Figli')" (click)="closeMenu(menu)">
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-label>Figli</ion-label>
+        </ion-item>
+
+        <ion-item button routerLink="/scadenze" routerLinkActive="active" (click)="setTitle('Messaggi')" (click)="closeMenu(menu)">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-label>Messaggi</ion-label>
+        </ion-item>
+
+        <ion-item button routerLink="/profilo" routerLinkActive="active" (click)="setTitle('Profilo')" (click)="closeMenu(menu)">
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-label>Il mio profilo</ion-label>
+        </ion-item>
+
+        <ion-item button (click)="openExternalLink()">
+          <ion-icon slot="start" name="globe-outline"></ion-icon>
+          <ion-label>Sito Web Scuola</ion-label>
+        </ion-item>
+
+        <ion-item button (click)="logOut()">
+          <ion-icon slot="start" name="exit-outline"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+        <!-- Aggiungi altre voci di menu -->
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Pulsante per aprire il menu -->
+  <ion-header >
+    <ion-toolbar *ngIf="isLoggedIn">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{title}}</ion-title>
+      <ion-buttons slot="end">
+        <img src="../assets/logoscrittaazzurro.png" alt="Logo" style="height: 20px;" />
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenuto principale -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
