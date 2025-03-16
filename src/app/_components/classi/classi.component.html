@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>I tuoi figli</ion-title>
+    <ion-title>Le tue classi</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,22 +8,37 @@
   <ion-list *ngIf="ClassiDocenze.length > 0; else noClassi">
     <ion-card *ngFor="let ClasseDocenza of ClassiDocenze" class="classe-card">
       <ion-card-header>
-        <ion-card-title class="fs20">
+        <ion-card-title class="fs20 center">
           {{ ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizione2 }} {{ ClasseDocenza.classeSezioneAnno.classeSezione.sezione }}           
         </ion-card-title>
 
       </ion-card-header>
       <ion-card-content>
+
         <div *ngFor="let materia of ClasseDocenza.materie" class="materia-row">
-          <span class="color-dot" [style.background-color]="materia?.color"></span> 
-          <strong>{{ materia?.descrizione }}</strong>
+          <div class="left-content">
+            <span class="color-dot" [style.background-color]="materia?.color"></span> 
+            <strong>{{ materia?.descrizione }}</strong>
+          </div>
+          <ion-button size="small" class="mt10" >
+            <ion-icon slot="end" name="albums-outline" ></ion-icon>
+            Programma svolto
+          </ion-button>
         </div>
+
+
 
 
           <ion-button expand="block" size="small" (click)="mostraOrario(ClasseDocenza.classeSezioneAnno.id, ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizioneBreve + ' ' +ClasseDocenza.classeSezioneAnno.classeSezione.sezione)" class="mt10">
             <ion-icon slot="start" name="calendar"></ion-icon>
              Orario delle lezioni
           </ion-button>
+
+          <ion-button expand="block" size="small" (click)="mostraAlunni(ClasseDocenza.classeSezioneAnno.id, ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizioneBreve + ' ' +ClasseDocenza.classeSezioneAnno.classeSezione.sezione)" class="mt10">
+            <ion-icon slot="start" name="people-outline"></ion-icon>
+             Elenco Alunni
+          </ion-button>
+
       </ion-card-content>
     </ion-card>
   </ion-list>

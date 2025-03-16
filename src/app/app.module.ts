@@ -38,7 +38,8 @@ import { DatePipe }                                from '@angular/common';
 import { ServiceWorkerModule }                     from '@angular/service-worker';
 import { ClassiComponent }                         from './_components/classi/classi.component';
 import { LezioneComponent }                        from './_components/lezioni/lezione-edit/lezione-edit.component';
-import { PresenzeListComponent } from './_components/lezioni/presenze-list/presenze-list.component';
+import { PresenzeListComponent }                   from './_components/lezioni/presenze-list/presenze-list.component';
+import { AlunniListComponent }                     from './_components/alunni/alunni-list/alunni-list.component';
 
 
 
@@ -61,7 +62,8 @@ import { PresenzeListComponent } from './_components/lezioni/presenze-list/prese
     DocumentiComponent,
     ClassiComponent,
     LezioneComponent,
-    PresenzeListComponent
+    PresenzeListComponent,
+    AlunniListComponent
     ],
   imports: [
     BrowserModule, 

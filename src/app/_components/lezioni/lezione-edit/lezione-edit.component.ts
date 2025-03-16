@@ -19,6 +19,7 @@ import { FormatoData, Utility }                                      from '../..
 import { DialogOkComponent }                                         from '../../utilities/dialog-ok/dialog-ok.component';
 //import { VotiCompitoListComponent }             from '../voti-compito-list/voti-compito-list.component';
 import { PresenzeListComponent }                                     from '../presenze-list/presenze-list.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 //services
 import { MaterieService }                                            from 'src/app/_components/materie/materie.service';
@@ -54,40 +55,40 @@ export class LezioneComponent implements OnInit {
 
 //#region ----- Variabili ----------------------
 
-  form! :                                       UntypedFormGroup;
-  docenteID!:                                   number;
-  lezione$!:                                    Observable<CAL_Lezione>;
-  obsMaterie$!:                                 Observable<MAT_Materia[]>;
-  obsClassiDocentiMaterie$!:                    Observable<CLS_ClasseDocenteMateria[]>;
-  obsDocenti$!:                                 Observable<PER_Docente[]>;
-  obsSupplenti$!:                               Observable<PER_Docente[]>;
-  lezione!:                                      CAL_Lezione;
+  form!                          : UntypedFormGroup;
+  docenteID!                     : number;
+  lezione$!                      : Observable<CAL_Lezione>;
+  obsMaterie$!                   : Observable<MAT_Materia[]>;
+  obsClassiDocentiMaterie$!      : Observable<CLS_ClasseDocenteMateria[]>;
+  obsDocenti$!                   : Observable<PER_Docente[]>;
+  obsSupplenti$!                 : Observable<PER_Docente[]>;
+  lezione!                       : CAL_Lezione;
 
 
-  dtStart!:                                     Date;
-  dtEnd!:                                       Date;
-  strClasseSezioneAnno!:                        string;
-  strMateria!:                                  string;
-  strDocente!:                                  string;
-  strDtStart!:                                  string;
-  strDtEnd!:                                    string;
+  dtStart!                       : Date;
+  dtEnd!                         : Date;
+  strClasseSezioneAnno!          : string;
+  strMateria!                    : string;
+  strDocente!                    : string;
+  strDtStart!                    : string;
+  strDtEnd!                      : string;
 
-  strH_Ini!:                                    string;
-  strH_End!:                                    string;
-  classeSezioneAnnoID!:                         number;
+  strH_Ini!                      : string;
+  strH_End!                      : string;
+  classeSezioneAnnoID!           : number;
 
-  emptyForm :                                   boolean = false;
-  loading:                                      boolean = true;
-  ckAppello:                                    boolean = false;
-  ckCompito:                                    boolean = false;
+  emptyForm                      : boolean = false;
+  loading                        : boolean = true;
+  ckAppello                      : boolean = false;
+  ckCompito                      : boolean = false;
 
-  public docenteView:                           boolean = false;
-  breakpoint!:                                  number;
-  selectedTab:                                  number = 0;
+  public docenteView             : boolean = false;
+  breakpoint!                    : number;
+  selectedTab                    : number = 0;
 
   @ViewChild('autosize') autosize!:             CdkTextareaAutosize;
   @ViewChild("presenzeList") PresenzeListComponent!: PresenzeListComponent; 
-  @Input() lezioneID!        : number;
+  @Input() lezioneID!            : number;
   //@ViewChild(VotiCompitoListComponent) VotiCompitoListComponent!: VotiCompitoListComponent; 
 
 
@@ -100,7 +101,7 @@ export class LezioneComponent implements OnInit {
               // public _dialogRef                          : MatDialogRef<LezioneComponent>,
               
               private modalCtrl                 : ModalController,
-
+              private cdr: ChangeDetectorRef,
               private fb                        : UntypedFormBuilder,
               private svcLezioni                : LezioniService,
               private svcMaterie                : MaterieService,
@@ -186,6 +187,7 @@ export class LezioneComponent implements OnInit {
           this.strH_End = Utility.formatHour(this.dtEnd);
           this.ckAppello = lezione.ckAppello;
           this.ckCompito = lezione.ckCompito;
+          this.cdr.detectChanges();
 
         } )
       );
@@ -206,11 +208,11 @@ export class LezioneComponent implements OnInit {
           
           classeSezioneAnnoID: this.form.controls['classeSezioneAnnoID'].value,
           dtCalendario: this.form.controls['dtCalendario'].value,
-          //title: this.form.controls['title'].value,
-          title: this.form.controls['title'].value.substring(1), //siccome ho aggiunto la stellina devo toglierla
+          title: this.form.controls['title'].value,
+          //title: this.form.controls['title'].value.substring(1), //siccome ho aggiunto la stellina devo toglierla
           start: this.form.controls['start'].value,
           end: this.form.controls['end'].value,
-          colore: this.form.controls['colore'].value,
+          color: this.form.controls['colore'].value,
 
           h_Ini: this.form.controls['h_Ini'].value,
           h_End: this.form.controls['h_End'].value,

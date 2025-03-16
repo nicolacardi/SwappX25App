@@ -12,7 +12,7 @@ export interface CAL_Lezione {
   title:                                        string;
   start:                                        string;     //YYYY-MM-DDTHH:MM:SS
   end:                                          string;     //YYYY-MM-DDTHH:MM:SS
-  colore:                                       string;
+  color:                                       string;
 
   h_Ini:                                        string;
   h_End:                                        string;

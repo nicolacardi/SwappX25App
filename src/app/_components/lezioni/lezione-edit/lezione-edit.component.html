@@ -113,9 +113,8 @@
             </form>
           </ion-tab>
           <ion-tab tab="appello">
-            {{ckAppello}}
             <ion-button *ngIf="!ckAppello" expand="full" color="primary" type="submit" (click)="generaAppello()">Fai l'appello</ion-button>
-            <app-presenze-list *ngIf="ckAppello"[lezioneID] = "lezioneID"></app-presenze-list>
+            <app-presenze-list *ngIf="ckAppello" [lezioneID] = "lezioneID" ></app-presenze-list>
 
           </ion-tab>
         </ion-tabs>

@@ -73,13 +73,12 @@ export class ClassiComponent  implements OnInit {
 
 
     mostraOrario(classeSezioneAnnoID: number, classeEsezione: string) {
-        //this.router.navigate(['/orario', classeSezioneAnnoID, classeEsezione]);
-
         this.router.navigate(['/orario', classeSezioneAnnoID, classeEsezione], { queryParams: { docenteID: this.docenteID } });
-
-
     }
 
+    mostraAlunni(classeSezioneAnnoID: number, classeEsezione: string) {
+        this.router.navigate(['/alunni', classeSezioneAnnoID, classeEsezione]);
+    }
 
     groupByClasseSezioneAnno(docenze: CLS_ClasseDocenteMateria[]): ClasseConDocenze[] {
         const grouped: { [key: number]: ClasseConDocenze } = {};

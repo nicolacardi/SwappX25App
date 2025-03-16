@@ -10,6 +10,7 @@ import { PagamentiListComponent }                        from './_components/pag
 import { PresenzeAlunnoListComponent }                   from './_components/lezioni/presenze-alunno-list/presenze-alunno-list.component';
 import { DocumentiComponent }                            from './_components/documenti/documenti.component';
 import { ClassiComponent }                               from './_components/classi/classi.component';
+import { AlunniListComponent } from './_components/alunni/alunni-list/alunni-list.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path:'classi',                                component: ClassiComponent },
   
   { path: "profilo",                              component: ProfiloComponent },
+
+  {path: 'alunni/:classeSezioneAnnoID/:classeEsezione',            component: AlunniListComponent },
 
   {path: 'orario/:classeSezioneAnnoID/:classeEsezione',            component: LezioniCalendarioComponent },
 

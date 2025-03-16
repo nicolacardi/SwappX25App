@@ -92,7 +92,10 @@ export class LezioniCalendarioComponent implements OnInit{
 
               this.Events = val.map(lezione => ({
                 ...lezione, // Copia tutto il contenuto originale dell'oggetto lezione
-                title: lezione.docenteID === this.docenteID ? `⭐ ${lezione.title}` : lezione.title,
+                //title: lezione.docenteID === this.docenteID ? `✅ ${lezione.title}` : lezione.title,
+                //color: lezione.docenteID === this.docenteID ? "#123456" : lezione.color,
+                color: lezione.docenteID != this.docenteID ? "#dddddd" : lezione.color,
+
               }));
 
               this.calendarOptions.events = this.Events;
@@ -142,6 +145,7 @@ export class LezioniCalendarioComponent implements OnInit{
     events: [
       { title: 'Evento di prova', start: new Date() }
     ],
+
 
     eventClick:   this.openDetail.bind(this),         //quando si fa click su un evento esistente...
   };

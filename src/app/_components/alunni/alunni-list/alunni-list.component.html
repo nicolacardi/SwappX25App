@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista Alunni</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="filter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-item>
+      <ion-input (ionInput)="applyFilter($event)" placeholder="Cerca per nome, cognome o email"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let alunno of alunni" (click)="toggleCard(alunno)" lines="none">
+      <ion-card class="w100 no-margin">
+        <ion-card-header class="center ma">
+          <ion-card-title class="fs16">{{ alunno.persona.nome }} {{ alunno.persona.cognome }}</ion-card-title>
+        </ion-card-header>
+
+        <!-- Mostra solo se la card è aperta -->
+        <ion-card-content *ngIf="alunno.isOpen">
+          <p><strong>Data di nascita:</strong> {{ alunno.persona.dtNascita | date }}</p>
+          <p><strong>Email:</strong> {{ alunno.persona.email }}</p>
+          <p><strong>Telefono:</strong> {{ alunno.persona.telefono }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

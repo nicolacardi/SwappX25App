@@ -25,8 +25,21 @@ ion-card-header {
   }
   
 
+
+  .no-margin {
+    margin: 7px 10px !important; // Sovrascrive eventuali margini di default
+  }
   
 
+  ion-card {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
   
+  ion-card-header {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    display: flex;
+    justify-content: center;
+  }
 
   

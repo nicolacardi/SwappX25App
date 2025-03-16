@@ -8,3 +8,16 @@
     margin-left: 10px;
     margin-right: 10px; /* Distanza dal bordo destro */
   }
+
+  .materia-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Per centrare verticalmente gli elementi */
+    width: 100%;
+  }
+  
+  .left-content {
+    display: flex;
+    align-items: center;
+  }
+  
