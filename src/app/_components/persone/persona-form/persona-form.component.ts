@@ -2,11 +2,11 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild }       from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators }                from '@angular/forms';
-import { MatDialog }                                                       from '@angular/material/dialog';
 import { Observable, firstValueFrom, from , of }                           from 'rxjs';
 import { concatMap, mergeMap, tap }                                        from 'rxjs/operators';
 import { MatSelectChange, MatSelectTrigger }                               from '@angular/material/select';
 import { DatePipe }                                                        from '@angular/common';
+import { ModalController }                                                 from '@ionic/angular';
 
 //components
 import { FormatoData, Utility }                                            from '../../utilities/utility.component';
@@ -96,10 +96,10 @@ export class PersonaFormComponent implements OnInit {
 
 //#region ----- Constructor --------------------
 
-  constructor(private fb:                       UntypedFormBuilder, 
-              private svcPersone:               PersoneService,
-              private svcUser:                  UserService,
-              private svcComuni:                ComuniService,
+  constructor(private fb               : UntypedFormBuilder,
+              private svcPersone       : PersoneService,
+              private svcUser          : UserService,
+              private svcComuni        : ComuniService,
 
               // private svcAlunni:                AlunniService,
               // private svcGenitori:              GenitoriService,
@@ -109,10 +109,9 @@ export class PersonaFormComponent implements OnInit {
               // private svcITManagers:            ITManagersService,
               // private svcDirigenti:             DirigentiService,
               // private svcTipiPersona:           TipiPersonaService,
-              
-              public _dialog:                   MatDialog,
-              private _loadingService :         LoadingServiceIonic,
-              private datePipe: DatePipe
+              private modalCtrl        : ModalController,
+              private _loadingService  : LoadingServiceIonic,
+              private datePipe         : DatePipe
  ) { 
 
     let regCF = "^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$";
@@ -264,7 +263,7 @@ export class PersonaFormComponent implements OnInit {
 
     //verifica (e attende l'esito) se ci sono già persone con lo stesso nome-cognome, cf, email. 
     return from(this.checkExists()).pipe(
-      mergeMap((msg) => {
+      mergeMap(async (msg) => {
         if (msg && msg.length > 0) {
 
           const blockMessages = msg
@@ -272,10 +271,14 @@ export class PersonaFormComponent implements OnInit {
             .map(item => item.msg);
   
           if (blockMessages && blockMessages.length > 0) {
-            this._dialog.open(DialogOkComponent, {
-              width: '320px',
-              data: { titolo: "ATTENZIONE!", sottoTitolo: blockMessages.join(', ') + '<br>Impossibile Salvare' }
+
+            const modal = await this.modalCtrl.create({
+              component: DialogOkComponent,
+              componentProps: {
+                data: { titolo: "ATTENZIONE!", sottoTitolo: blockMessages.join(', ') + '<br>Impossibile Salvare' }
+              }
             });
+            modal.present();
             // la presenza di persone con stessa email o cf genera uno stop (gravità Block)
             return of();
           } 
@@ -283,23 +286,23 @@ export class PersonaFormComponent implements OnInit {
             const UnblockMessages = msg
               .filter(item => item.grav === "nonBlock")
               .map(item => item.msg);
-              // la presenza di persone con stesso nome e cognome genera una richiesta all'utente (gravità nonBlock)
-              //se procedere o meno
-
-            const dialogYesNo = this._dialog.open(DialogYesNoComponent, {
-              width: '320px',
-              data: { titolo: "ATTENZIONE!", sottoTitolo: UnblockMessages.join(', ') + '<br>Vuoi salvare un omonimo?' }
-            });
-  
-            return dialogYesNo.afterClosed().pipe(
-              mergeMap(result => {
+          
+            return from(this.modalCtrl.create({
+              component: DialogYesNoComponent,
+              componentProps: { 
+                titolo: "ATTENZIONE!", 
+                sottoTitolo: UnblockMessages.join(', ') + '<br>Vuoi salvare un omonimo?' 
+              }
+            })).pipe(
+              mergeMap(modal => {
+                modal.present(); // Mostra il modale
+                return from(modal.onDidDismiss()); // Attende la chiusura
+              }),
+              mergeMap(({ data: result }) => { 
                 if (result) {
-                  //se l'utente dice di procedere allora si valuta se post o put
-                  //***********************QUESTO BLOCCO SI RIPETE ANCHE IN CASO NON VENGA TROVATO ALCUN MSG ************/
                   if (this.personaID == null || this.personaID == 0) {
-                    //POST
+                    // POST
                     return this.svcPersone.post(this.form.value).pipe(
-                      // tap(() => this.saveRoles()),
                       tap(persona => {
                         let formData = { 
                           UserName: this.form.controls['email'].value,
@@ -307,19 +310,18 @@ export class PersonaFormComponent implements OnInit {
                           PersonaID: persona.id,
                           Password: "1234"
                         };
-                        //console.log("sto creando l'utente", formData);
                         this.svcUser.post(formData).subscribe();
                       })
                     );
                   } else {
-                    //PUT
-                    this.form.controls['dtNascita'].setValue(Utility.formatDate(this.form.controls['dtnascita'].value, FormatoData.yyyy_mm_dd));
-                    // this.saveRoles(); 
+                    // PUT
+                    this.form.controls['dtNascita'].setValue(
+                      Utility.formatDate(this.form.controls['dtNascita'].value, FormatoData.yyyy_mm_dd)
+                    );
                     return this.svcPersone.put(this.form.value);
                   }
-                  //*****************************FINO A QUI ***********************************************************/
                 } else {
-                  //se l'utente dice di non procedere tutto si ferma
+                  // Se l'utente dice di non procedere, restituisce un Observable vuoto
                   return of();
                 }
               })
@@ -405,195 +407,3 @@ export class PersonaFormComponent implements OnInit {
 //#endregion
 
 }
-
-
-/* ##### OLD ######
-
-  // async checkExistsNC() : Promise<any>{
-  //   let nome = this.form.controls.nome.value;
-  //   let cognome = this.form.controls.cognome.value;
-  //   let objTrovato : PER_Persona;
-  //   await firstValueFrom(this.svcPersone.getByNomeCognome(nome, cognome, this.personaID));
-  // }
-
-  // changeOptionRoles (event: MatOptionSelectionChange){
-  //   //console.log (event.source.viewValue);
-  //   if (event.source.viewValue == 'Alunno')
-    
-  //     if (event.source.selected)
-  //       {this.showAlunnoForm = true}
-  //     else    
-  //       {this.showAlunnoForm = false}
-    
-  //   if (event.source.viewValue == 'Genitore')
-
-  //     if (event.source.selected)
-  //       {this.showGenitoreForm = true}
-  //     else    
-  //       {this.showGenitoreForm = false}
-  
-  //   // this.changedRoles.emit();
-  // }
-
- // saveold() :Observable<any>{
-  //     if (this.personaID == null || this.personaID == 0) {
-      
-  //       return from(this.checkExists()).pipe(
-  //         mergeMap((msg) => {
-  //           if (msg && msg.length > 0) { 
-              
-  //             const blockMessages = msg
-  //                 .filter(item => item.grav === "Block")
-  //                 .map(item => item.msg); 
-
-  //             if (blockMessages && blockMessages.length > 0){
-  //               this._dialog.open(DialogOkComponent, {
-  //                 width: '320px',
-  //                 data: { titolo: "ATTENZIONE!", sottoTitolo: blockMessages.join(', ') + 'Impossibile Salvare' }
-  //               });
-                
-  //               return of()
-  //             }
-  //             else {
-  //               const UnblockMessages = msg
-  //               .filter(item => item.grav === "nonBlock")
-  //               .map(item => item.msg);
-
-  //               const dialogYesNo = this._dialog.open(DialogYesNoComponent, {
-  //                 width: '320px',
-  //                 data: { titolo: "ATTENZIONE!", sottoTitolo: UnblockMessages.join(', ') + 'Vuoi salvare?' }
-  //               });
-
-  //               dialogYesNo.afterClosed().subscribe(result => {
-  //                 if(result) {
-  //                   return of();
-  //                 } else {
-  //                   return of();
-  //                 }
-  //               });
-  //             }
-  //           }
-  //           return this.svcPersone.post(this.form.value)
-  //           .pipe (
-  //             tap(()=> this.saveRoles() ),
-  //             concatMap(persona => {
-  //               let formData = { 
-  //                 UserName:   this.form.controls.email.value,
-  //                 Email:      this.form.controls.email.value,
-  //                 PersonaID:  persona.id,
-  //                 Password:   "1234"
-  //               };
-  //               console.log ("sto creando l'utente", formData);
-  //               return this.svcUser.post(formData)
-  //             }),
-  //           )
-  //         })
-  //       )
-  //     }
-  //     else {
-  //       this.form.controls.dtNascita.setValue(Utility.formatDate(this.form.controls.dtNascita.value, FormatoData.yyyy_mm_dd));
-  //       this.saveRoles(); 
-  //       return this.svcPersone.put(this.form.value)
-  //     }
-  // };
-
-  // saveRoles() {
-  //   //parallelamente alla save (put o post che sia) della persona bisogna occuparsi di inserire i diversi ruoli
-  //   //ALU_Alunno
-  //   //ALU_Genitore
-  //   //PER_Docente
-  //   //PER_DocenteCoord - per questo una modalità diversa
-  //   //PER_NonDocente
-  //   //PER_Dirigente
-  //   //PER_ITManager
-  //   let selectedRolesIds = []
-  //   //console.log("elenco dei valori arrivati inizialmente", this._lstRoles); //è l'elenco dei ruoli "precedenti". E' un array di stringhe del tipo ["Alunno", "ITManager"...]
-  //   //console.log ("persona-form - saveRoles - this.personaID", this.personaID);
-  //   if (this.form.controls._lstRoles.value.length != 0) selectedRolesIds = this.form.controls._lstRoles.value;
-  //     const selectedRolesDescrizioni = selectedRolesIds.map((tipo:any) => {const tipoPersona = this.lstTipiPersona.find(tp => tp.id === tipo);
-  //     return tipoPersona ? tipoPersona.descrizione : ''; // Restituisce la descrizione se trovata, altrimenti una stringa vuota
-  //   });
-
-  //   //console.log("this._lstRoles",this._lstRoles);
-  //   //console.log("elenco dei valori selezionati dall'utente",selectedRolesDescrizioni);
-
-  //   if (this._lstRoles) { //se è un record nuovo e non seleziono nessuno è undefined
-  //     this._lstRoles.forEach(async roleinput=> {
-  //       {
-  //         if (!selectedRolesDescrizioni.includes(roleinput)) {
-  //           //questo roleinput è stato CANCELLATO, va dunque rimosso (ammesso che si possa)
-  //           switch (roleinput) {
-  //             case "Alunno":
-  //               this.svcAlunni.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //             case "Genitore":
-  //               this.svcGenitori.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //             case "Docente":
-  //               this.svcDocenti.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //             case "DocenteCoord":
-  //               let docente!: PER_Docente;
-  //               await firstValueFrom(this.svcDocenti.getByPersona(this.personaID).pipe(tap(docenteEstratto => 
-  //                 {docente = docenteEstratto})));
-  //               this.svcDocentiCoord.deleteByDocente(docente.id);
-  //               break;
-  //             case "NonDocente":
-  //               this.svcNonDocenti.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //             case "Dirigente":
-  //               this.svcDirigenti.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //             case "ITManager":
-  //               this.svcITManagers.deleteByPersona(this.personaID).subscribe();
-  //             break;
-  //           }
-  //         }
-  //       }
-  //     })
-
-  //     selectedRolesDescrizioni.forEach(async (roleselected:string)=> {
-  //       {
-  //         if (!this._lstRoles.includes(roleselected))   {
-  //           //questo roleselected è stato AGGIUNTO, va dunque fatta la post
-  //           let formData =  {
-  //             personaID: this.personaID
-  //           }
-  //           switch (roleselected) {
-  //             case "Alunno":
-  //               this.svcAlunni.post(formData).subscribe();
-                
-  //             break;
-  //             case "Genitore":
-  //               this.svcGenitori.post(formData).subscribe();
-  //             break;
-  //             case "Docente":
-  //               this.svcDocenti.post(formData).subscribe();
-  //             break;
-  //             case "DocenteCoord":
-  //               let formDataDocenteCoord = {};
-  //               await firstValueFrom(this.svcDocenti.getByPersona(this.personaID).pipe(tap(docenteEstratto => 
-  //                 {
-  //                   formDataDocenteCoord = {
-  //                     docenteID: docenteEstratto.id
-  //                   }
-  //                 })));
-  //               this.svcDocentiCoord.post(formDataDocenteCoord).subscribe();
-
-  //             break;
-  //             case "NonDocente":
-  //               this.svcNonDocenti.post(formData).subscribe();
-  //             break;
-  //             case "Dirigente":
-  //               this.svcDirigenti.post(formData).subscribe();
-  //             break;
-  //             case "ITManager":
-  //               this.svcITManagers.post(formData).subscribe();
-  //             break;
-  //           }
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
-*/

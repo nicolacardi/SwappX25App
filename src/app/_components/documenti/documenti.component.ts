@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }     from '@angular/core';
 import { CertCompetenzeService } from './certcompetenze.service';
-import { ActivatedRoute } from '@angular/router';
-import { PagelleService } from './pagelle.service';
-import { FilesService } from './files.service';
-import { saveAs } from 'file-saver';
-import { ToastService } from 'src/app/_services/toast.service';
+import { ActivatedRoute }        from '@angular/router';
+import { PagelleService }        from './pagelle.service';
+import { FilesService }          from './files.service';
+import { saveAs }                from 'file-saver';
+import { ToastService }          from 'src/app/_services/toast.service';
 
 @Component({
   selector: 'app-documenti',

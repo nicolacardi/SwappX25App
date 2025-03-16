@@ -22,11 +22,14 @@ export class HomePage implements OnInit {
             private svcTitle        : TitleService,
             private svcRisorse      : RisorseService
 
-  ) {}
+  ) {
+
+    this.currUser = Utility.getCurrentUser();
+  }
 
    ngOnInit() {
 
-    this.currUser = Utility.getCurrentUser();
+    //this.currUser = Utility.getCurrentUser();
     console.log ("home.page - ngOnInit - CurrUser", this.currUser);
     this.svcTitle.setTitle(`Homepage`);
 
@@ -45,7 +48,7 @@ export class HomePage implements OnInit {
         this.svcRisorse.get(item.id).subscribe((fileData: any) => {
           console.log("File ricevuto:", fileData);
           this.bachecaItems[index].fileBase64 = fileData.fileBase64;
-          console.log("home.page ngOnInit - bacheaItems", this.bachecaItems);
+          console.log("home.page ngOnInit - bachecaItems", this.bachecaItems);
         });
       });
     });

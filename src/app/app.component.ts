@@ -26,6 +26,9 @@ export class AppComponent {
   public currUser!         : User;
   public currPersona!      : PER_Persona;
 
+  public isGenitore        : boolean = false;
+  public isDocente         : boolean = false;
+
   public userFullName      : string = "";
   public imgAccount        = "";
   stringJson               : any;
@@ -54,43 +57,63 @@ export class AppComponent {
                 this.title = newTitle; // aggiorna il titolo
               });
 
+              this.currUser = Utility.getCurrentUser();
+
+
 }
 
 
-  async ngOnInit () {
 
-    //Carico i dati e l'immagine dell'utente tramite un eventEmitter
-    if (this.eventEmitterService.userSubscribeAttiva==undefined) {    
-      //in questo modo non solo faccio la subscribe al RefreshFoto ma imposto la subscription a un valore diverso da undefined
-      this.eventEmitterService.userSubscribeAttiva = this.eventEmitterService.invokeUserEmit.subscribe(
-        user => {
-          this.currUser = user;
-          console.log ("app.component - ngOnInit currUser", this.currUser);
-          //questo è un "captatore" dell'Emit, quindi può funzionare sia in fase di Login che di Logout
-          if (user) {
-            this.userFullName = this.currUser.fullname;
-            this.isLoggedIn = true;
-          } 
-          else {
-            console.log ("app.component - ngOnInit set isLoggedIn to false");
-            this.isLoggedIn = false; //Ma serve? se emetto (vedi funzione logout sì) altrimenti no
-          }
-        }
-      );    
-    }
-
-    this.refreshUserData();
-
-    //Carico i dati e l'immagine dell'utente tramite un eventEmitter
-    if (this.eventEmitterService.refreshFotoSubscribeAttiva==undefined) {    
-      //in questo modo non solo faccio la subscribe al RefreshFoto ma imposto la subscription a un valore diverso da undefined
-      //inoltre predispongo per il refresh
-      this.eventEmitterService.refreshFotoSubscribeAttiva = this.eventEmitterService.invokeAppComponentRefreshFoto.subscribe(
-        () => this.refreshUserData()  //così facendo in caso di F5 viene lanciato refreshUserData
-      );    
-    } 
+async ngOnInit() {
+  // Se currUser è già valorizzato, calcola subito i ruoli
+  //console.log("app.component - ngOnInit - this.currUser", this.currUser);
+  if (this.currUser) {
+    this.setUserRoles(this.currUser);
   }
 
+  // Carico i dati e l'immagine dell'utente tramite un eventEmitter
+  if (this.eventEmitterService.userSubscribeAttiva == undefined) {
+    // in questo modo non solo faccio la subscribe al RefreshFoto ma imposto la subscription a un valore diverso da undefined
+    this.eventEmitterService.userSubscribeAttiva = this.eventEmitterService.invokeUserEmit.subscribe(user => {
+      this.currUser = user;
+      this.setUserRoles(user); // Ricalcolo i ruoli ogni volta che cambia l'utente
+
+      console.log("app.component - ngOnInit currUser", this.currUser);
+      
+      // Questo è un "captatore" dell'Emit, quindi può funzionare sia in fase di Login che di Logout
+      if (user) {
+        this.userFullName = this.currUser.fullname;
+        this.isLoggedIn = true;
+      } else {
+        console.log("app.component - ngOnInit set isLoggedIn to false");
+        this.isLoggedIn = false;
+      }
+    });
+  }
+
+  this.refreshUserData();
+
+  // Carico i dati e l'immagine dell'utente tramite un eventEmitter per il refresh delle foto
+  if (this.eventEmitterService.refreshFotoSubscribeAttiva == undefined) {
+    // in questo modo non solo faccio la subscribe al RefreshFoto ma imposto la subscription a un valore diverso da undefined
+    // inoltre predispongo per il refresh
+    this.eventEmitterService.refreshFotoSubscribeAttiva = this.eventEmitterService.invokeAppComponentRefreshFoto.subscribe(
+      () => this.refreshUserData()  // così facendo in caso di F5 viene lanciato refreshUserData
+    );
+  }
+}
+
+
+  private setUserRoles(user: any) {
+    //console.log ("app.component - setUserRoles", user);
+    if (user && user.persona && user.persona._LstRoles) {
+      this.isGenitore = user.persona._LstRoles.includes('Genitore');
+      this.isDocente = user.persona._LstRoles.includes('Docente');
+    } else {
+      this.isGenitore = false;
+      this.isDocente = false;
+    }
+  }
 
   refreshUserData () {
 
@@ -99,7 +122,7 @@ export class AppComponent {
       this.currUser = Utility.getCurrentUser();
 
     if (this.currUser) {
-      console.log ("app.component - refreshUserData set isLoggedIn to true");
+      // console.log ("app.component - refreshUserData set isLoggedIn to true");
 
       this.isLoggedIn = true;
 

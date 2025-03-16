@@ -1,0 +1,22 @@
+/* Assicurati che il modal occupi tutta la finestra in altezza */
+.modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Assicura che occupi tutta l'altezza della finestra */
+    padding: 20px;
+  }
+
+
+  .action-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  ion-button {
+    width: 45%;  /* I pulsanti occupano il 45% della larghezza */
+  }
+  

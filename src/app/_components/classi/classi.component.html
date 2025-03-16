@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>I tuoi figli</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="ClassiDocenze.length > 0; else noClassi">
+    <ion-card *ngFor="let ClasseDocenza of ClassiDocenze" class="classe-card">
+      <ion-card-header>
+        <ion-card-title class="fs20">
+          {{ ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizione2 }} {{ ClasseDocenza.classeSezioneAnno.classeSezione.sezione }}           
+        </ion-card-title>
+
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngFor="let materia of ClasseDocenza.materie" class="materia-row">
+          <span class="color-dot" [style.background-color]="materia?.color"></span> 
+          <strong>{{ materia?.descrizione }}</strong>
+        </div>
+
+
+          <ion-button expand="block" size="small" (click)="mostraOrario(ClasseDocenza.classeSezioneAnno.id, ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizioneBreve + ' ' +ClasseDocenza.classeSezioneAnno.classeSezione.sezione)" class="mt10">
+            <ion-icon slot="start" name="calendar"></ion-icon>
+             Orario delle lezioni
+          </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noClassi>
+    <ion-item>
+      <ion-label>Nessuna classe associata a questo maestro.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

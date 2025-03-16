@@ -9,6 +9,7 @@ import { LezioniCalendarioComponent }                    from './_components/lez
 import { PagamentiListComponent }                        from './_components/pagamenti/pagamenti-list/pagamenti-list.component';
 import { PresenzeAlunnoListComponent }                   from './_components/lezioni/presenze-alunno-list/presenze-alunno-list.component';
 import { DocumentiComponent }                            from './_components/documenti/documenti.component';
+import { ClassiComponent }                               from './_components/classi/classi.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,8 @@ const routes: Routes = [
   { path:'orario',                                component: LezioniCalendarioComponent },
 
   { path:'figli',                                 component: FigliComponent },
+
+  { path:'classi',                                component: ClassiComponent },
   
   { path: "profilo",                              component: ProfiloComponent },
 

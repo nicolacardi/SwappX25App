@@ -1,20 +1,21 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>{{ data.titolo }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
     <div class="icon-title-container">
-        <ion-icon class="fs24 mt15" name="warning-outline"></ion-icon>
-        <h3 mat-dialog-title>{{ data.titolo }}</h3>
+      <ion-icon class="fs24 mt15" name="warning-outline"></ion-icon>
+      <h3>{{ data.titolo }}</h3>
     </div>
-
-
-    <div class="center" mat-dialog-content>
-
-        <p style="white-space: normal" innerHTML="{{data.sottoTitolo}}"></p>
-        
+  
+    <div class="center">
+      <p [innerHTML]="data.sottoTitolo" style="white-space: normal;"></p>
     </div>
-    <div mat-dialog-actions class="mat-dialog-buttonsContainer">
-        <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ok</button> 
-    </div>
-
-
-
-    
-
+  
+    <ion-footer>
+      <ion-button expand="block" (click)="dismiss()">Ok</ion-button>
+    </ion-footer>
+  </ion-content>
 

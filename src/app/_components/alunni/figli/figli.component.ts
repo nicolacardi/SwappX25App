@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { map, switchMap, forkJoin, of } from 'rxjs';
-import { ALU_Alunno } from 'src/app/_models/ALU_Alunno';
-import { User } from 'src/app/_user/Users';
-import { AlunniService } from '../alunni.service';
-import { GenitoriService } from '../../genitori/genitori.service';
-import { Utility } from '../../utilities/utility.component';
-import { UserService } from 'src/app/_user/user.service';
-import { _UT_UserFoto } from 'src/app/_models/_UT_UserFoto';
-import { IscrizioniService } from '../../iscrizioni/iscrizioni.service';
-import { CLS_Iscrizione } from 'src/app/_models/CLS_Iscrizione';
-import { Router } from '@angular/router';
-import { LoadingServiceIonic } from '../../utilities/loading/loadingIonic.service';
+import { Component, OnInit }                 from '@angular/core';
+import { map, switchMap, forkJoin, of }      from 'rxjs';
+import { ALU_Alunno }                        from 'src/app/_models/ALU_Alunno';
+import { User }                              from 'src/app/_user/Users';
+import { AlunniService }                     from '../alunni.service';
+import { GenitoriService }                   from '../../genitori/genitori.service';
+import { Utility }                           from '../../utilities/utility.component';
+import { UserService }                       from 'src/app/_user/user.service';
+import { _UT_UserFoto }                      from 'src/app/_models/_UT_UserFoto';
+import { IscrizioniService }                 from '../../iscrizioni/iscrizioni.service';
+import { CLS_Iscrizione }                    from 'src/app/_models/CLS_Iscrizione';
+import { Router }                            from '@angular/router';
+import { LoadingServiceIonic }               from '../../utilities/loading/loadingIonic.service';
 
 @Component({
   selector: 'app-figli',
@@ -30,12 +30,12 @@ export class FigliComponent implements OnInit {
   
 
   constructor(
-    private svcUser: UserService,
-    private svcAlunni: AlunniService,
-    private svcGenitori: GenitoriService,
-    private svcIscrizioni: IscrizioniService,
-    private router: Router,
-              private _loadingService:          LoadingServiceIonic,
+    private svcUser                          : UserService,
+    private svcAlunni                        : AlunniService,
+    private svcGenitori                      : GenitoriService,
+    private svcIscrizioni                    : IscrizioniService,
+    private router                           : Router,
+    private _loadingService                  : LoadingServiceIonic,
   ) { }
 
   async ngOnInit() {

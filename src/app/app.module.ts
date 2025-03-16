@@ -35,7 +35,10 @@ import { PagamentiListComponent }                  from './_components/pagamenti
 import { PresenzeAlunnoListComponent }             from './_components/lezioni/presenze-alunno-list/presenze-alunno-list.component';
 import { DocumentiComponent }                      from './_components/documenti/documenti.component';
 import { DatePipe }                                from '@angular/common';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule }                     from '@angular/service-worker';
+import { ClassiComponent }                         from './_components/classi/classi.component';
+import { LezioneComponent }                        from './_components/lezioni/lezione-edit/lezione-edit.component';
+import { PresenzeListComponent } from './_components/lezioni/presenze-list/presenze-list.component';
 
 
 
@@ -55,7 +58,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     LezioniCalendarioComponent,
     PagamentiListComponent,
     PresenzeAlunnoListComponent,
-    DocumentiComponent
+    DocumentiComponent,
+    ClassiComponent,
+    LezioneComponent,
+    PresenzeListComponent
     ],
   imports: [
     BrowserModule, 

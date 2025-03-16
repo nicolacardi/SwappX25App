@@ -3,7 +3,6 @@
 import { Component, OnInit }                    from '@angular/core';
 import { MatTableDataSource }                   from '@angular/material/table';
 import { Observable, map }                           from 'rxjs';
-import { MatDialog }                            from '@angular/material/dialog';
 
 //components
 import { Utility }                              from '../../utilities/utility.component';
@@ -17,6 +16,7 @@ import { LoadingServiceIonic }                  from '../../utilities/loading/lo
 //models
 import { User }                                 from 'src/app/_user/Users';
 import { CAL_ScadenzaPersone }                  from 'src/app/_models/CAL_Scadenza';
+import { ModalController } from '@ionic/angular';
 
 //#endregion
 
@@ -49,10 +49,12 @@ export class MieScadenzeComponent implements OnInit {
 
 //#region ----- Constructor --------------------
 
-  constructor(private svcScadenzePersone:                 ScadenzePersoneService,
-              private _loadingService:                    LoadingServiceIonic,
-              private _toast:                             ToastService,
-              public _dialog:                             MatDialog  ) {
+  constructor(private svcScadenzePersone        : ScadenzePersoneService,
+              private _loadingService           : LoadingServiceIonic,
+              private _toast                    : ToastService,
+              private modalCtrl                 : ModalController,
+              
+               ) {
 
     this.currUser = Utility.getCurrentUser();   
   }
@@ -107,12 +109,17 @@ export class MieScadenzeComponent implements OnInit {
     });
   }
 
-  setRespinto(element: CAL_ScadenzaPersone) {
+  async setRespinto(element: CAL_ScadenzaPersone) {
     if (element.personaID == this.currUser.personaID) {
-      this._dialog.open(DialogOkComponent, {
-        width: '320px',
-        data: {titolo: "ATTENZIONE!", sottoTitolo: "Non è possibile Respingere un proprio invito"}
+
+      const modal = await this.modalCtrl.create({
+        component: DialogOkComponent,
+        componentProps: {
+          data: { titolo: "ATTENZIONE!", sottoTitolo: "Non è possibile Respingere un proprio invito" }
+        }
       });
+      modal.present();
+      
       this.loadData();
     } 
     else {

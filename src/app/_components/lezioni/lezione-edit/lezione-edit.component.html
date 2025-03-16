@@ -1,0 +1,133 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Lezione</ion-title>
+      <ion-buttons slot="start">
+        <ion-icon class="fs20" name="chevron-back-outline" (click)="close()"></ion-icon>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="save()" >Salva</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+
+      <ion-content [fullscreen]="true">
+
+
+        <ion-tabs class="mt45">
+
+          <ion-tab-bar slot="top">
+            <ion-tab-button tab="lezione">
+              <ion-label class="fs18">Dati Lezione</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="appello">
+              <ion-label class="fs18">Appello</ion-label>
+            </ion-tab-button>
+          </ion-tab-bar>
+      
+
+          <ion-tab tab="lezione">
+
+
+            <form *ngIf="(lezione$ | async) || emptyForm" [formGroup]="form" (ngSubmit)="save()">
+
+
+              <ion-item class="greyfont">
+                <ion-input type="text" label="Docente" labelPlacement="stacked" value="{{strDocente}}" readonly></ion-input>
+
+                <ion-input type="text" label="Materia" labelPlacement="stacked" value="{{strMateria}}" readonly></ion-input>
+              </ion-item>
+
+              <ion-item class="greyfont">
+                <ion-input type="text" label="Classe Sezione" labelPlacement="stacked" value ="{{strClasseSezioneAnno}}" readonly></ion-input>
+
+                <ion-input type="date" label="Data Calendario" labelPlacement="stacked" formControlName="dtCalendario" readonly></ion-input>
+              </ion-item>
+
+              <ion-item class="greyfont">
+                <ion-input type="time" label="Ora Inizio" labelPlacement="stacked" formControlName="h_Ini" readonly></ion-input>
+
+                <ion-input type="time" label="Ora Fine" labelPlacement="stacked" formControlName="h_End" readonly></ion-input>
+              </ion-item>
+
+
+
+
+          
+          
+              <!-- <ion-item *ngIf="lezione.dove !== 'orario'">
+                <ion-label>Supplente</ion-label>
+                <ion-select formControlName="supplenteID" placeholder="Seleziona Supplente">
+                  <ion-select-option *ngFor="let supplente of obsSupplenti$ | async" [value]="supplente.id">
+                    {{ supplente.persona!.nome }} {{ supplente.persona!.cognome }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item> -->
+          
+              <!-- <div style="height: 3px; margin-top: 8px; margin-bottom: 5px; background-color: rgba(38, 137, 155, 0.244); background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(9,86,121,1) 49%, rgba(0,212,255,0) 100%);">
+
+              </div> -->
+
+
+              <div class="or-spacer">
+                <div class="mask"></div>
+
+              </div>
+
+
+              <!-- <ion-button expand="full" color="primary" (click)="generaAppello()">Presenti/Assenti</ion-button> -->
+
+              <ion-item >
+                <ion-checkbox formControlName="ckFirma"  [disabled] = "ckFirma.checked" #ckFirma></ion-checkbox>
+
+                <!-- [disabled] = "ckFirma.checked" -->
+                <ion-label>Firma Lezione Svolta</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-input type="text" label="Argomento della lezione" labelPlacement="stacked" formControlName="argomento"></ion-input>
+              </ion-item>
+          
+              <ion-item>
+                <ion-input type="text" label="Compiti assegnati" labelPlacement="stacked" formControlName="compiti"></ion-input>
+              </ion-item>
+
+          
+
+
+              <ion-item>
+                <ion-checkbox formControlName="ckCompito" #ckCompito></ion-checkbox>
+                <ion-label>Compito in Classe</ion-label>
+              </ion-item>
+          
+              <ion-item>
+                <ion-input type="text" *ngIf="ckCompito.checked" label="Argomento compito in classe" labelPlacement="stacked" formControlName="argomentoCompito"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-checkbox formControlName="ckAssente"></ion-checkbox>
+                <ion-label>Ero Assente</ion-label>
+              </ion-item>
+          
+            </form>
+          </ion-tab>
+          <ion-tab tab="appello">
+            {{ckAppello}}
+            <ion-button *ngIf="!ckAppello" expand="full" color="primary" type="submit" (click)="generaAppello()">Fai l'appello</ion-button>
+            <app-presenze-list *ngIf="ckAppello"[lezioneID] = "lezioneID"></app-presenze-list>
+
+          </ion-tab>
+        </ion-tabs>
+      </ion-content>
+
+<!-- 
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button expand="full" (click)="save()" [disabled]="form.invalid || loading">
+              Salva
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer> -->

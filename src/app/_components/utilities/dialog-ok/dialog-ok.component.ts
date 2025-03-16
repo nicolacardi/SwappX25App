@@ -1,13 +1,8 @@
-import {Component, Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { DialogData } from 'src/app/_models/DialogData';
+// Interfaccia per i dati che il modale riceverà
 
-export interface DialogData {
-    titolo: string;
-    sottoTitolo: string;
-    annoID: number;
-    classeSezioneAnnoID: number;
-    alunnoID: number;
-}
 
 @Component({
   selector: 'app-dialog-ok',
@@ -15,12 +10,14 @@ export interface DialogData {
   styleUrls: ['./dialog-ok.component.css'],
   standalone: false
 })
+export class DialogOkComponent {
+  constructor(
+    private modalCtrl: ModalController,
+    @Inject('data') public data: DialogData
+  ) {}
 
-export class DialogOkComponent   {
-
-  constructor( public dialogRef: MatDialogRef<DialogOkComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    }
-
-
+  // Metodo per chiudere il modale
+  dismiss() {
+    this.modalCtrl.dismiss(false); // Passa il valore che vuoi quando chiudi
+  }
 }

@@ -1,0 +1,17 @@
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let element of listaPresenze.data">
+            <ion-checkbox 
+                slot="start"
+                [checked]="element.ckPresente"
+                (ionChange)="changedCkPresente($event.detail.checked, element)">
+            </ion-checkbox>
+
+            <ion-label>
+                ciao (questo testo non si vede!!! eppure i dati li carica (vedi console.log))
+                <!-- <h2>{{ element.alunno.persona.cognome }} {{ element.alunno.persona.nome }}</h2> -->
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>
+  

@@ -51,8 +51,8 @@ ckPsw = true;
               private renderer:                 Renderer2) {
 
     this.form = this.fb.group({
-      UserName:                   ['nicola.cardi@gmail.com', Validators.required],
-      Password:                   ['12345', { validators:[ Validators.required, Validators.maxLength(50)]}]
+      UserName:                   ['carlo.gazzola@gmail.com', Validators.required],
+      Password:                   ['1234', { validators:[ Validators.required, Validators.maxLength(50)]}]
     })
    }
 

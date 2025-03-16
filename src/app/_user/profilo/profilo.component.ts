@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild }               from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators }       from '@angular/forms';
-import { MatDialog }                                              from '@angular/material/dialog';
 //import { ChangeDetectorRef }                                      from '@angular/core';
+import { MatDialog }                                        from '@angular/material/dialog';
 
 //components
 import { DialogOkComponent }                                      from '../../_components/utilities/dialog-ok/dialog-ok.component';
@@ -19,7 +19,7 @@ import { ToastService }                                           from 'src/app/
 //models
 import { _UT_UserFoto }                                           from 'src/app/_models/_UT_UserFoto';
 import { User }                                                   from 'src/app/_user/Users';
-import { IonImg } from '@ionic/angular';
+import { IonImg, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profilo',
@@ -43,12 +43,14 @@ export class ProfiloComponent implements OnInit {
   @ViewChild(PersonaFormComponent) personaFormComponent!: PersonaFormComponent; 
 //#endregion
 
-  constructor(private fb:                                 UntypedFormBuilder, 
-              private svcUser:                            UserService,
-              private svcPersone:                         PersoneService,
-              public _dialog:                             MatDialog,
-              private eventEmitterService:                EventEmitterService,
-              private _toast:                             ToastService,
+  constructor(private fb                        : UntypedFormBuilder,
+              private svcUser                   : UserService,
+              private svcPersone                : PersoneService,
+              private modalCtrl                 : ModalController,
+              public _dialog:                   MatDialog,
+
+              private eventEmitterService       : EventEmitterService,
+              private _toast                    : ToastService,
               //private cdr:                                ChangeDetectorRef
             ) { 
 
@@ -66,7 +68,7 @@ export class ProfiloComponent implements OnInit {
 
 
     
-    this.form.get('username')?.setValue(this.currUser.username);
+    this.form.get('username')?.setValue(this.currUser.userName);
     this.form.get('email')?.setValue(this.currUser.email);
     this.form.get('fullname')?.setValue(this.currUser.fullname);
 
@@ -85,15 +87,20 @@ export class ProfiloComponent implements OnInit {
   
 
 
-  onImageChange(e: any) {
+  async onImageChange(e: any) {
    
     if(e.target.files && e.target.files.length) {
       const [file] = e.target.files;
       if(e.target.files[0].size > 200000){
-        this._dialog.open(DialogOkComponent, {
-          width: '320px',
-          data: {titolo: "ATTENZIONE!", sottoTitolo: "Il file eccede la dimensione massima (200kb)"}
+
+        const modal = await this.modalCtrl.create({
+          component: DialogOkComponent,
+          componentProps: {
+            data: { titolo: "ATTENZIONE!", sottoTitolo: "Il file eccede la dimensione massima (200kb)" }
+          }
         });
+        modal.present();
+
         return;
       };
 
@@ -119,17 +126,23 @@ export class ProfiloComponent implements OnInit {
 
   }
 
-  cropImage(e: any) {
+  async cropImage(e: any) {
    
     if(e.target.files && e.target.files.length) {
       const [file] = e.target.files;
       if(e.target.files[0].size > 200000){
-        this._dialog.open(DialogOkComponent, {
-          width: '320px',
-          data: {titolo: "ATTENZIONE!", sottoTitolo: "Il file eccede la dimensione massima (200kb)"}
+
+        const modal = await this.modalCtrl.create({
+          component: DialogOkComponent,
+          componentProps: {
+            data: { titolo: "ATTENZIONE!", sottoTitolo: "Il file eccede la dimensione massima (200kb)" }
+          }
         });
+        modal.present();
+
         return;
       };
+
 
       const dialogRef = this._dialog.open(PhotocropComponent, {
         width: '270px',
@@ -158,7 +171,7 @@ export class ProfiloComponent implements OnInit {
 
     this.svcUser.put(formData).subscribe({
       next: res => {
-        this.currUser.username = this.form.controls['username'].value;
+        this.currUser.userName = this.form.controls['username'].value;
         this.currUser.email =this.form.controls['email'].value;
         this.currUser.fullname = this.form.controls['fullname'].value;
 

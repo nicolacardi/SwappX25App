@@ -13,8 +13,8 @@ export interface DialogData {
       
 export interface DialogDataLezione {
         lezioneID:                              number;
-        start:                                  string;
-        end:                                    string;
+        start:                                  Date;
+        end:                                    Date;
         dtCalendario:                           string;
         h_Ini:                                  string;
         h_End:                                  string;
