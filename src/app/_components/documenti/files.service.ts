@@ -5,16 +5,16 @@ import { environment }                          from 'src/environments/environme
 import * as saveAs                              from 'file-saver';
 
 //components
-import { FormatoData, Utility } from '../utilities/utility.component';
+import { FormatoData, Utility }                 from '../utilities/utility.component';
 //services
-import { IscrizioneRisposteService } from './iscrizione-risposte.service';
+import { IscrizioneRisposteService }            from './iscrizione-risposte.service';
 
 //models
 import { DOC_File }                             from 'src/app/_models/DOC_File';
-import { RPT_TagDocument } from 'src/app/_models/RPT_TagDocument';
-import { CLS_Iscrizione } from 'src/app/_models/CLS_Iscrizione';
-import { DOC_PagellaVoto } from 'src/app/_models/DOC_PagellaVoto';
-import { DOC_Pagella } from 'src/app/_models/DOC_Pagella';
+import { RPT_TagDocument }                      from 'src/app/_models/RPT_TagDocument';
+import { CLS_Iscrizione }                       from 'src/app/_models/CLS_Iscrizione';
+import { DOC_PagellaVoto }                      from 'src/app/_models/DOC_PagellaVoto';
+import { DOC_Pagella }                          from 'src/app/_models/DOC_Pagella';
 import { CAL_Lezione } from 'src/app/_models/CAL_Lezione';
 
 

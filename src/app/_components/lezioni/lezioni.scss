@@ -87,23 +87,54 @@ ion-item-divider {
   // --padding-end: 20px;
 }
 
-.or-spacer {
-  // margin-top:100px; margin-left:100px; width:400px; 
-  // position:relative; 
-  
-  .mask { 
-    overflow:hidden; height:20px; 
-    &:after { 
-      content:''; 
-      display:block; margin:-25px auto 0;
-      width:100%; height:25px;  
-      border-radius:125px / 12px;  
-      box-shadow:0 0 8px black;
-    }
-  }
-}
+
 
 ion-tab[tab="appello"] {
   display: block;
   visibility: visible;
+}
+
+
+
+//per le card delle lezioni programma svolto
+
+
+.no-margin {
+  margin: 7px 10px !important; // Sovrascrive eventuali margini di default
+}
+
+
+// ion-card {
+//   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
+// }
+
+ion-item {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+.header-container {
+  display: flex;
+  justify-content: flex-start; /* Allinea tutto a sinistra */
+  align-items: center;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Distanza tra icona e nome */
+  width: 100%;
+}
+
+.title-text {
+  text-align: left; /* Allinea il testo a sinistra */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.icon {
+  font-size: 20px;
 }

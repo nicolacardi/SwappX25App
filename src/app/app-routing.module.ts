@@ -11,6 +11,7 @@ import { PresenzeAlunnoListComponent }                   from './_components/lez
 import { DocumentiComponent }                            from './_components/documenti/documenti.component';
 import { ClassiComponent }                               from './_components/classi/classi.component';
 import { AlunniListComponent } from './_components/alunni/alunni-list/alunni-list.component';
+import { ProgrammaSvoltoComponent } from './_components/lezioni/programma-svolto/programma-svolto.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path:'classi',                                component: ClassiComponent },
   
   { path: "profilo",                              component: ProfiloComponent },
+
+  {path: 'programma/:materiaID/:classeSezioneAnnoID/:classeEsezione',            component: ProgrammaSvoltoComponent },
 
   {path: 'alunni/:classeSezioneAnnoID/:classeEsezione',            component: AlunniListComponent },
 

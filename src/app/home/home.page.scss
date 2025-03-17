@@ -88,3 +88,19 @@
 }
 
 
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; /* Spazio tra il nome e l'icona */
+}
+
+.message-icon {
+  position: absolute; 
+  font-size: 35px;
+  right: 15px; 
+  color: red; /* Cambia il colore se necessario */
+  cursor: pointer;
+  transform: rotate(10deg); /* Inclinazione di 10 gradi a destra */
+}
+

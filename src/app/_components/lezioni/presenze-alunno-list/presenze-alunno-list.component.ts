@@ -14,10 +14,12 @@ import { LoadingServiceIonic } from '../../utilities/loading/loadingIonic.servic
 })
 export class PresenzeAlunnoListComponent implements OnInit {
 
-  alunnoID!:          number;
-  annoID!:            number;
-  presenze:           CAL_Presenza[] = [];
-  obsPresenze$!:      Observable<CAL_Presenza[]>;
+  alunnoID!             : number;
+  annoID!               : number;
+  presenze              : CAL_Presenza[] = [];
+  presenzeFiltrate      : CAL_Presenza[] = [];
+  mostraSoloAssenti     = false;
+  obsPresenze$!         : Observable<CAL_Presenza[]>;
 
   constructor(
               private route:            ActivatedRoute,
@@ -40,14 +42,25 @@ export class PresenzeAlunnoListComponent implements OnInit {
 
       this.obsPresenze$ = this.svcPresenze.listByAlunno(this.alunnoID);
     
-
       const loadPresenze$ = this._loadingService.showLoaderUntilCompleted(this.obsPresenze$);
-
-
       loadPresenze$.subscribe( 
-
         Presenze => {
-          this.presenze = Presenze;
+          this.presenze = Presenze.sort((a, b) => {
+            const dateA = new Date(a.lezione!.dtCalendario).getTime();
+            const dateB = new Date(b.lezione!.dtCalendario).getTime();
+          
+            // Prima ordina per dtCalendario (decrescente)
+            if (dateB !== dateA) {
+              return dateB - dateA;
+            }
+          
+            // Se le date sono uguali, ordina per h_Ini (crescente)
+            return a.lezione!.h_Ini.localeCompare(b.lezione!.h_Ini);
+          });
+
+
+          this.filtraPresenze(); // Applica il filtro iniziale
+
           console.log ("Presenze", Presenze);
         },
         
@@ -55,4 +68,16 @@ export class PresenzeAlunnoListComponent implements OnInit {
     });
   }
 
+  toggleFiltroAssenti() {
+    this.mostraSoloAssenti = !this.mostraSoloAssenti;
+    this.filtraPresenze();
+  }
+
+  filtraPresenze() {
+    if (this.mostraSoloAssenti) {
+      this.presenzeFiltrate = this.presenze.filter(p => !p.ckPresente);
+    } else {
+      this.presenzeFiltrate = [...this.presenze];
+    }
+  }
 }

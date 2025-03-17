@@ -48,7 +48,8 @@ export class PresenzeListComponent implements OnInit {
       loadPresenze$.subscribe({
         next: res => {
           console.log("presenze-list - loadData - res", res);
-          this.listaPresenze.data = res;
+          this.listaPresenze.data = res.sort((a, b) => b.lezione!.dtCalendario.localeCompare(a.lezione!.dtCalendario));
+
         },
         error: err => console.error("Errore nel caricamento delle presenze", err),
         complete: () => console.log("Caricamento completato!")
@@ -61,6 +62,7 @@ export class PresenzeListComponent implements OnInit {
     this.svcPresenze.put(presenza).subscribe();
   }
 
+  
   
 
 }

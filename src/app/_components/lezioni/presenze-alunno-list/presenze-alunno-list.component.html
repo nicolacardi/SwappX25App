@@ -1,6 +1,11 @@
+
+
 <ion-content>
-<ion-list class="mt56">
-    <ion-item *ngFor="let presenza of presenze">
+  <ion-button class="mt60 w100" (click)="toggleFiltroAssenti()">
+    {{ mostraSoloAssenti ? 'Mostra tutti' : 'Mostra solo assenze' }}
+  </ion-button>
+  <ion-list>
+    <ion-item class="item-card" *ngFor="let presenza of presenzeFiltrate">
       <ion-icon 
         slot="start" 
         [name]="presenza.ckPresente ? 'person-circle-outline' : 'person-circle-outline'" 

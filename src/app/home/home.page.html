@@ -1,8 +1,15 @@
 <ion-content [fullscreen]="true">
+
+
   <div class="welcome-container mt56">
     <h2>Benvenuto</h2>
-    <h1>{{ currUser.fullname }}</h1>
+    <div class="user-info">
+      <h1>{{ currUser.fullname }}</h1>
+      <ion-icon *ngIf="cisonoMessaggi" name="mail-unread-outline" class="message-icon" routerLink="/scadenze"></ion-icon>
+    </div>
   </div>
+
+
 
   <div class="bacheca-container">
     <h3 class="bacheca-title">Bacheca</h3>

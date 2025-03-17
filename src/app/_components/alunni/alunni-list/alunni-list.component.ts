@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit }     from '@angular/core';
+import { Observable }            from 'rxjs';
 
-import { LoadingServiceIonic } from '../../utilities/loading/loadingIonic.service';
-import { ALU_Alunno } from 'src/app/_models/ALU_Alunno';
-import { AlunniService } from '../alunni.service';
-import { ActivatedRoute } from '@angular/router';
-import { TitleService } from 'src/app/_services/title.service';
+import { LoadingServiceIonic }   from '../../utilities/loading/loadingIonic.service';
+import { ALU_Alunno }            from 'src/app/_models/ALU_Alunno';
+import { AlunniService }         from '../alunni.service';
+import { ActivatedRoute }        from '@angular/router';
+import { TitleService }          from 'src/app/_services/title.service';
 
 @Component({
   selector: 'app-alunni-list',
@@ -20,10 +20,10 @@ export class AlunniListComponent implements OnInit {
   filterValue = '';
 
   constructor(
-    private svcAlunni: AlunniService,
-    private route: ActivatedRoute,
-    private svcTitle: TitleService,
-    private _loadingService: LoadingServiceIonic
+    private svcAlunni            : AlunniService,
+    private route                : ActivatedRoute,
+    private svcTitle             : TitleService,
+    private _loadingService      : LoadingServiceIonic
   ) { }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class AlunniListComponent implements OnInit {
       const classeEsezione = params['classeEsezione'];
       this.svcTitle.setTitle("Alunni " + classeEsezione);
 
-      obsAlunni$ = this.svcAlunni.listByClasseSezioneAnno(this.classeSezioneAnnoID);
+      obsAlunni$ = this.svcAlunni.listByClasseSezioneAnnoWithParents(this.classeSezioneAnnoID);
       const loadAlunni$ = this._loadingService.showLoaderUntilCompleted(obsAlunni$);
 
       loadAlunni$.subscribe(res => {

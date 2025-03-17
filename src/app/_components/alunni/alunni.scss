@@ -31,15 +31,35 @@ ion-card-header {
   }
   
 
-  ion-card {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  ion-card-header {
-    padding-right: 20px !important;
-    padding-left: 20px !important;
-    display: flex;
-    justify-content: center;
+  ion-item {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
   }
 
+  
+  .header-container {
+    display: flex;
+    justify-content: flex-start; /* Allinea tutto a sinistra */
+    align-items: center;
+    padding: 8px 16px;
+    width: 100%;
+  }
+  
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Distanza tra icona e nome */
+    width: 100%;
+  }
+  
+  .title-text {
+    flex-grow: 1; /* Assicura che il testo si estenda senza centrare */
+    text-align: left; /* Allinea il testo a sinistra */
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .icon {
+    font-size: 20px;
+  }
+  
   

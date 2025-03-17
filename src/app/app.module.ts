@@ -40,6 +40,7 @@ import { ClassiComponent }                         from './_components/classi/cl
 import { LezioneComponent }                        from './_components/lezioni/lezione-edit/lezione-edit.component';
 import { PresenzeListComponent }                   from './_components/lezioni/presenze-list/presenze-list.component';
 import { AlunniListComponent }                     from './_components/alunni/alunni-list/alunni-list.component';
+import { ProgrammaSvoltoComponent } from './_components/lezioni/programma-svolto/programma-svolto.component';
 
 
 
@@ -63,7 +64,8 @@ import { AlunniListComponent }                     from './_components/alunni/al
     ClassiComponent,
     LezioneComponent,
     PresenzeListComponent,
-    AlunniListComponent
+    AlunniListComponent,
+    ProgrammaSvoltoComponent
     ],
   imports: [
     BrowserModule, 

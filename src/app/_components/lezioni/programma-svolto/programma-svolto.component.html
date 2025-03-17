@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Programma Svolto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="filter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-item>
+      <ion-input (ionInput)="applyFilter($event)" placeholder="Cerca per Argomento"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let lezione of lezioni" (click)="toggleCard(lezione)" >
+      <ion-card class="w100 no-margin">
+
+        <ion-card-header class="header-container">
+          <div class="title-container">
+            <ion-icon class="icon" [name]="lezione.isOpen ? 'remove-circle-outline' : 'add-circle-outline'"></ion-icon>
+            <span class="title-text">{{ lezione.dtCalendario }}</span>
+            <span class="title-text" style="text-align: left !important">{{ lezione.argomento }}</span>
+          </div>
+        </ion-card-header>
+        
+
+        <!-- Mostra solo se la card è aperta -->
+        <ion-card-content *ngIf="lezione.isOpen">
+          <p><strong>Ora inizio:</strong> {{ lezione.h_Ini }}</p>
+          <p><strong>Ora Fine:</strong> {{ lezione.h_End }}</p>
+          <p><strong>Programma Svolto:</strong> {{ lezione.argomento }}</p>
+          <p><strong>Compiti Assegnati:</strong> {{ lezione.compiti }}</p>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
