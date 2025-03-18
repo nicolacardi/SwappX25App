@@ -8,17 +8,14 @@ import dayGridPlugin                                     from '@fullcalendar/day
 import timeGridPlugin                                    from '@fullcalendar/timegrid';
 import listPlugin                                        from '@fullcalendar/list';
 import interactionPlugin                                 from '@fullcalendar/interaction';
-import resourceTimelinePlugin                            from '@fullcalendar/resource-timeline';
 import itLocale                                          from '@fullcalendar/core/locales/it';
 import { ActivatedRoute }                                from '@angular/router';
-import { Observable }                                    from 'rxjs';
-import { CAL_Lezione }                                   from 'src/app/_models/CAL_Lezione';
+
 import { LezioniService }                                from '../lezioni.service';
 import { TitleService }                                  from 'src/app/_services/title.service';
 import { LoadingServiceIonic }                           from '../../utilities/loading/loadingIonic.service';
 import { ModalController }                               from '@ionic/angular';
 import { LezioneComponent }                              from '../lezione-edit/lezione-edit.component';
-import { DialogDataLezione }                             from 'src/app/_models/DialogData';
 import { ToastService }                                  from 'src/app/_services/toast.service';
 
 
@@ -46,21 +43,7 @@ export class LezioniCalendarioComponent implements OnInit{
 
   ) { }
 
-  // ngOnInit() {
 
-  //   let obsLezioni$: Observable<CAL_Lezione[]>;
-    
-  //   this.route.paramMap.subscribe(params => {
-  //     this.classeSezioneAnnoID = params.get('id') ?? '';
-  //     if (this.classeSezioneAnnoID) {
-  //       console.log('ClasseSezioneAnnoID ricevuto:', this.classeSezioneAnnoID);
-  //     } else {
-  //       console.error('Parametro id non trovato!');
-  //     }
-  //   });
-
-
-  // }
 
   ngOnInit() {
 
@@ -84,18 +67,12 @@ export class LezioniCalendarioComponent implements OnInit{
     
           loadLezioni$.subscribe(
             val => {
-              //this.Events = val;
               console.log ("lezioni-calendario - ngOnInit lezioni", val);
-
-
-
-
               this.Events = val.map(lezione => ({
                 ...lezione, // Copia tutto il contenuto originale dell'oggetto lezione
                 //title: lezione.docenteID === this.docenteID ? `✅ ${lezione.title}` : lezione.title,
                 //color: lezione.docenteID === this.docenteID ? "#123456" : lezione.color,
                 color: lezione.docenteID != this.docenteID ? "#dddddd" : lezione.color,
-
               }));
 
               this.calendarOptions.events = this.Events;

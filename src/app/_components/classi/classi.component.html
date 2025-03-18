@@ -20,7 +20,7 @@
             <span class="color-dot" [style.background-color]="materia?.color"></span> 
             <strong>{{ materia?.descrizione }}</strong>
           </div>
-          <ion-button size="small" class="mt10" >
+          <ion-button size="small" class="mt10" (click)="mostraProgramma(materia.id, ClasseDocenza.classeSezioneAnno.id, ClasseDocenza.classeSezioneAnno.classeSezione.classe?.descrizioneBreve + ' ' +ClasseDocenza.classeSezioneAnno.classeSezione.sezione)" >
             <ion-icon slot="end" name="albums-outline" ></ion-icon>
             Programma svolto
           </ion-button>

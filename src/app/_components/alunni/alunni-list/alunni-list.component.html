@@ -17,11 +17,16 @@
   </div>
 
   <ion-list>
-    <ion-item *ngFor="let alunno of alunni" (click)="toggleCard(alunno)" lines="none">
+    <ion-item *ngFor="let alunno of alunni" (click)="toggleCard(alunno)" >
       <ion-card class="w100 no-margin">
-        <ion-card-header class="center ma">
-          <ion-card-title class="fs16">{{ alunno.persona.nome }} {{ alunno.persona.cognome }}</ion-card-title>
+
+        <ion-card-header class="header-container">
+          <div class="title-container">
+            <ion-icon class="icon" [name]="alunno.isOpen ? 'remove-circle-outline' : 'add-circle-outline'"></ion-icon>
+            <span class="title-text">{{ alunno.persona.nome }} {{ alunno.persona.cognome }}</span>
+          </div>
         </ion-card-header>
+        
 
         <!-- Mostra solo se la card è aperta -->
         <ion-card-content *ngIf="alunno.isOpen">

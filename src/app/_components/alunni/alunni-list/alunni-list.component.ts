@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit }     from '@angular/core';
+import { Observable }            from 'rxjs';
 
-import { LoadingServiceIonic } from '../../utilities/loading/loadingIonic.service';
-import { ALU_Alunno } from 'src/app/_models/ALU_Alunno';
-import { AlunniService } from '../alunni.service';
-import { ActivatedRoute } from '@angular/router';
-import { TitleService } from 'src/app/_services/title.service';
+import { LoadingServiceIonic }   from '../../utilities/loading/loadingIonic.service';
+import { ALU_Alunno }            from 'src/app/_models/ALU_Alunno';
+import { AlunniService }         from '../alunni.service';
+import { ActivatedRoute }        from '@angular/router';
+import { TitleService }          from 'src/app/_services/title.service';
 
 @Component({
   selector: 'app-alunni-list',

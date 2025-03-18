@@ -27,6 +27,7 @@ export abstract class Utility {
 
   ///Formatta una data dal formato [2022-03-17T11:30:00.000Z] al formato [dd/mm/yyyy] o [yyyy-mm-dd]
   public static formatDate ( data: any, formato: FormatoData): string {
+    console.log (data);
     if (data == null) return '';
     let retDate= data;
     switch (formato) {
@@ -41,6 +42,7 @@ export abstract class Utility {
         retDate = day + '/' + month + '/' + year;
         break;
     }
+    console.log ("retDate", retDate);
     return retDate;
   }
 

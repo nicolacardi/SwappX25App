@@ -74,6 +74,11 @@ export class LezioniService {
     //http://213.215.231.4/SwappX/api/CAL_Lezioni/ListByDocenteClasseSezioneAnno/3/16
   }
 
+  listByMateriaClasseSezioneAnno(materiaID: number, classeSezioneAnnoID: number): Observable<CAL_Lezione[]>{
+    return this.http.get<CAL_Lezione[]>(environment.apiBaseUrl+'CAL_Lezioni/ListByMateriaClasseSezioneAnno/'+ materiaID + '/' + classeSezioneAnnoID)
+    //http://213.215.231.4/SwappX/api/CAL_Lezioni/ListByMateriaClasseSezioneAnno/3/16
+  }
+
 
   listByDocenteAndOraOverlap(lezioneID: number, docenteID: number, dtCalendario: string, h_Ini: string, h_End: string): Observable<CAL_Lezione[]>{
     let strQuery = environment.apiBaseUrl+'CAL_Lezioni/ListByDocenteAndOraOverlap/'+ lezioneID + '/' + docenteID + '/' + dtCalendario + '/' + Utility.URL_FormatHour(h_Ini) + '/' + Utility.URL_FormatHour( h_End);

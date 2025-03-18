@@ -80,6 +80,10 @@ export class ClassiComponent  implements OnInit {
         this.router.navigate(['/alunni', classeSezioneAnnoID, classeEsezione]);
     }
 
+    mostraProgramma(materiaID: number, classeSezioneAnnoID: number, classeEsezione: string) {
+        this.router.navigate(['/programma', materiaID, classeSezioneAnnoID, classeEsezione]);
+    }
+
     groupByClasseSezioneAnno(docenze: CLS_ClasseDocenteMateria[]): ClasseConDocenze[] {
         const grouped: { [key: number]: ClasseConDocenze } = {};
     
