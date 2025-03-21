@@ -32,7 +32,26 @@
         <ion-card-content *ngIf="alunno.isOpen">
           <p><strong>Data di nascita:</strong> {{ alunno.persona.dtNascita | date }}</p>
           <p><strong>Email:</strong> {{ alunno.persona.email }}</p>
-          <p><strong>Telefono:</strong> {{ alunno.persona.telefono }}</p>
+          <p><strong>Tel:</strong> {{ alunno.persona.telefono }}</p>
+          <div class="or-spacer">
+            <div class="mask"></div>
+          </div>
+          <strong class="center">GENITORI</strong>
+          <ul>
+            <li *ngFor="let genitore of alunno._Genitori">
+              {{ genitore.genitore?.persona?.nome }} {{ genitore.genitore?.persona?.cognome }}
+              <ul>
+                <li *ngIf="genitore.genitore?.persona?.email">
+                  Email: {{ genitore.genitore?.persona?.email }}
+                </li>
+                <li *ngIf="genitore.genitore?.persona?.telefono">
+                  Tel: {{ genitore.genitore?.persona?.telefono }}
+                </li>             
+              </ul>
+              
+
+            </li>
+          </ul>
         </ion-card-content>
       </ion-card>
     </ion-item>

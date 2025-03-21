@@ -20,10 +20,10 @@ export class AlunniListComponent implements OnInit {
   filterValue = '';
 
   constructor(
-    private svcAlunni: AlunniService,
-    private route: ActivatedRoute,
-    private svcTitle: TitleService,
-    private _loadingService: LoadingServiceIonic
+    private svcAlunni            : AlunniService,
+    private route                : ActivatedRoute,
+    private svcTitle             : TitleService,
+    private _loadingService      : LoadingServiceIonic
   ) { }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class AlunniListComponent implements OnInit {
       const classeEsezione = params['classeEsezione'];
       this.svcTitle.setTitle("Alunni " + classeEsezione);
 
-      obsAlunni$ = this.svcAlunni.listByClasseSezioneAnno(this.classeSezioneAnnoID);
+      obsAlunni$ = this.svcAlunni.listByClasseSezioneAnnoWithParents(this.classeSezioneAnnoID);
       const loadAlunni$ = this._loadingService.showLoaderUntilCompleted(obsAlunni$);
 
       loadAlunni$.subscribe(res => {

@@ -31,6 +31,11 @@ export class AlunniService {
     //http://213.215.231.4/swappX/api/ALU_Alunni/ListByClasseSezioneAnno/3
   }
 
+  listByClasseSezioneAnnoWithParents(classeSezioneAnnoID: any): Observable<ALU_Alunno[]>{
+    return this.http.get<ALU_Alunno[]>(environment.apiBaseUrl+'ALU_Alunni/ListByClasseSezioneAnnoWithParents/'+classeSezioneAnnoID);
+    //http://213.215.231.4/swappX/api/ALU_Alunni/ListByClasseSezioneAnnoWithParents/16
+  }
+
   listWithParents(): Observable<ALU_Alunno[]>{
       return this.http.get<ALU_Alunno[]>(environment.apiBaseUrl+'ALU_Alunni/ListWithParents');
       //http://213.215.231.4/swappX/api/ALU_Alunni/ListWithParents

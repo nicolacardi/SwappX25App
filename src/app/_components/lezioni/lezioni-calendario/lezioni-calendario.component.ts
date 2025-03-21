@@ -68,12 +68,17 @@ export class LezioniCalendarioComponent implements OnInit{
           loadLezioni$.subscribe(
             val => {
               console.log ("lezioni-calendario - ngOnInit lezioni", val);
-              this.Events = val.map(lezione => ({
+              if (this.docenteID) { 
+                //se sono le lezioni di un docente devo colorare le altre di grigio, altrimenti no
+                this.Events = val.map(lezione => ({
                 ...lezione, // Copia tutto il contenuto originale dell'oggetto lezione
                 //title: lezione.docenteID === this.docenteID ? `✅ ${lezione.title}` : lezione.title,
                 //color: lezione.docenteID === this.docenteID ? "#123456" : lezione.color,
                 color: lezione.docenteID != this.docenteID ? "#dddddd" : lezione.color,
-              }));
+                }));
+              } else {
+                this.Events = val;
+              }
 
               this.calendarOptions.events = this.Events;
             },
@@ -131,30 +136,32 @@ export class LezioniCalendarioComponent implements OnInit{
   async openDetail(clickInfo: EventClickArg) {
 
     const docenteIDLezione = clickInfo.event.extendedProps['docenteID']; // ID docente della lezione
-
-    console.log("apro la lezione");
-    if (docenteIDLezione == this.docenteID) {
-      const lezioneID = Number(clickInfo.event.id);
-      const modal = await this.modalCtrl.create({
-        component: LezioneComponent, // Il componente che vuoi aprire nel modale
-        componentProps: {
-          lezioneID
-          //dove: this.dove,
-          //docenteID: this.docenteID
-        },
-        //cssClass: 'add-DetailDialog', // Se vuoi uno stile personalizzato
-      });
-    
-      // Apri il modale
-      await modal.present();
-    
-      // Esegui qualcosa quando il modale viene chiuso
-      const { data } = await modal.onWillDismiss();
-      // if (data) {
-      //   this.loadData();
-      // }
-    } else {
-      this._toast.presentToast ('Si possono aprire solo le proprie lezioni ')
+    //solo se siamo nella vista per docente qualcosa può funzionare
+    if (this.docenteID) {
+      console.log("provo ad aprire la lezione");
+      if (docenteIDLezione == this.docenteID) {
+        const lezioneID = Number(clickInfo.event.id);
+        const modal = await this.modalCtrl.create({
+          component: LezioneComponent, // Il componente che vuoi aprire nel modale
+          componentProps: {
+            lezioneID
+            //dove: this.dove,
+            //docenteID: this.docenteID
+          },
+          //cssClass: 'add-DetailDialog', // Se vuoi uno stile personalizzato
+        });
+      
+        // Apri il modale
+        await modal.present();
+      
+        // Esegui qualcosa quando il modale viene chiuso
+        const { data } = await modal.onWillDismiss();
+        // if (data) {
+        //   this.loadData();
+        // }
+      } else {
+        this._toast.presentToast ('Si possono aprire solo le proprie lezioni ')
+      }
     }
   }
 
